@@ -10,9 +10,7 @@ export class Login extends React.Component {
       loginInfo: {
         userName: '',
         password: '',
-      },
-      error: null,
-      isLoggingIn: false
+      }
     }
   }
 
@@ -26,15 +24,29 @@ export class Login extends React.Component {
     })
   }
 
-  handleSubmit(e: any) {
+  async handleSubmit(e: any) {
     e.preventDefault();
     const {
       userName,
       password
       // @ts-ignore
     } = this.state.loginInfo;
-    requestSessionToken(userName, password)
-  }
+
+      const result = await requestSessionToken(
+        userName,
+        password
+      )
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      if (!result.token) {
+        throw new Error('No token recieved');
+      }
+      localStorage.setItem('dossier_session_token', result.token);
+      window.location.reload();
+    } catch(error: any) {
+      console.log(error)
+    }
 
   render() {
     return (

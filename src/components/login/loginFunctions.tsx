@@ -7,9 +7,20 @@ export async function requestSessionToken (userName: string, password: string){
     password: password
   })
       .then(function (response: any) {
-        console.log(response);
+        return response.data;
       })
       .catch(function (error: any) {
         console.log(error);
       });
+}
+
+export function checkSession() {
+  return axios(`${serverUrl}/authenticate`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': localStorage.getItem('dossier_session_token')
+    }
+  })
+    .then((res: any) => res.status === 200);
 }
