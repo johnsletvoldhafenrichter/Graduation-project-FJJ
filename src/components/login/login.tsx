@@ -43,14 +43,14 @@ export class Login extends React.Component {
           <Input
             id="userName"
             placeholder="Enter username..."
-            onChange={() => {
+            onChange={(event) => {
               this.handleChange('userName', event)
             }}
           />
           <Input
             id="password"
             placeholder="Enter password..."
-            onChange={() => {
+            onChange={(event) => {
               this.handleChange('password', event)
             }}
           />

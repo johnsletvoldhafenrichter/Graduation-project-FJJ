@@ -2,13 +2,14 @@ import React from 'react';
 import './css/App.css';
 import "@dossier/mithra-ui/dist/ds.css"
 import Main from './components/main';
+import {Login} from "./components/login/login";
 
 class App extends React.Component {
     constructor(props: any) {
         super(props);
 
         this.state = {
-            isAuthenticated: true,
+            isAuthenticated: false,
             isLoading: false,
         };
     }
@@ -19,7 +20,7 @@ class App extends React.Component {
         return (
             isAuthenticated ?
             <Main/> :
-            <div>Ikke Logget Inn!!!</div>
+            <Login/>
         )
     }
 }
