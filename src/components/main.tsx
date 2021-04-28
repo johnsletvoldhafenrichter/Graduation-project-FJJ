@@ -13,6 +13,8 @@ import {
   NavbarButton,
 } from "@dossier/mithra-ui";
 
+import {Dinsideauth} from "./dinside/dinsideauth";
+
 export default class Main extends React.Component {
   render() {
     return (
@@ -70,7 +72,7 @@ export default class Main extends React.Component {
                 <div>Hei dette er din side!</div>
               </Route>
               <Route path="/logout">
-                <div>Trykk her for å logge ut!</div>
+                <Dinsideauth />
               </Route>
             </Switch>
           </div>
