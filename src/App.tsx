@@ -18,13 +18,9 @@ class App extends React.Component {
 
     const isAuthenticated = await checkSession();
 
-    if (!isAuthenticated) {
-      this.setState({ isAuthenticated: false });
+    if (isAuthenticated) {
+      this.setState({ isAuthenticated: true });
     }
-
-    this.setState({
-      isAuthenticated: true,
-    });
   }
 
   render() {
