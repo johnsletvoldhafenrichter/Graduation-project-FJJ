@@ -16,9 +16,9 @@ class App extends React.Component {
 
   async componentDidMount() {
 
-    const isAuthenticated = await checkSession();
+    const checkForAuthentication = await checkSession();
 
-    if (isAuthenticated) {
+    if (checkForAuthentication) {
       this.setState({ isAuthenticated: true });
     }
   }
@@ -27,7 +27,6 @@ class App extends React.Component {
     // @ts-ignore
     const {isAuthenticated} = this.state
     return (
-      // isLoading ? <div>loading...</div> :
       isAuthenticated ?
         <Main/> :
         <Login/>
