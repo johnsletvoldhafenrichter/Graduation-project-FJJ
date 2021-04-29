@@ -33,6 +33,7 @@ export class Login extends React.Component {
             // @ts-ignore
         } = this.state.loginInfo;
 
+
         const result = await requestSessionToken(
             userName,
             password
@@ -41,6 +42,7 @@ export class Login extends React.Component {
             this.setState({
                 loginError: 'Something went wrong!'
             })
+            return;
         }
         if (!result.token) {
             this.setState({
