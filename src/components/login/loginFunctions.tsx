@@ -7,10 +7,14 @@ export async function requestSessionToken (userName: string, password: string){
     password: password
   })
       .then(function (response: any) {
+          console.log(response)
         return response.data;
       })
       .catch(function (error: any) {
-        console.log(error);
+          const error_obj = {
+              error: error
+          }
+        return error_obj;
       });
 }
 
