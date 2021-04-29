@@ -13,6 +13,12 @@ import {
   NavbarButton,
 } from "@dossier/mithra-ui";
 
+<<<<<<< Updated upstream
+=======
+import {Dinsideauth} from "./dinside/dinsideauth";
+import {Profil} from './profil/profil';
+
+>>>>>>> Stashed changes
 export default class Main extends React.Component {
   render() {
     return (
@@ -51,7 +57,9 @@ export default class Main extends React.Component {
                     text="Kursoversikt"/>
                   <NavbarButton
                     icon="User"
-                    text="Profil"/>
+                    text="Profil"
+                    as={Link}
+                    to="/profil"/>
                   <NavbarButton
                     icon="Logout"
                     text="Logg ut"/>
@@ -71,6 +79,9 @@ export default class Main extends React.Component {
               </Route>
               <Route path="/logout">
                 <div>Trykk her for å logge ut!</div>
+              </Route>
+              <Route path="/profil">
+                <Profil/>
               </Route>
             </Switch>
           </div>
