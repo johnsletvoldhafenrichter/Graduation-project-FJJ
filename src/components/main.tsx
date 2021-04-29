@@ -18,6 +18,7 @@ import {Dinsideauth} from "./dinside/dinsideauth";
 import {Profileauth} from './profil/porfileauth';
 import {logoutfunction} from "./login/logoutfunction";
 import {Kursoversiktauth} from "./kursoversikt/kursoversiktauth";
+import {Kurs} from "./kurs/kurs";
 
 export default class Main extends React.Component {
   render() {
@@ -39,11 +40,6 @@ export default class Main extends React.Component {
             {
               <>
                 <NavbarSection>
-                  {/*<NavbarButton*/}
-                  {/*    as={NavLink}*/}
-                  {/*    exact icon="UserHome"*/}
-                  {/*    text="Home"*/}
-                  {/*    to="/Navbar"/>*/}
                   <NavbarButton
                     icon="AdminHome"
                     text="Min side"
@@ -51,7 +47,9 @@ export default class Main extends React.Component {
                     to="/dinside"/>
                   <NavbarButton
                     icon="UserPlans"
-                    text="Mine kurs"/>
+                    text="Mine kurs"
+                    as={Link}
+                    to="/course"/>
                   <NavbarButton
                     icon="Learn"
                     text="Kursoversikt"

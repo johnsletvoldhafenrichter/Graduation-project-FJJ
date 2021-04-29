@@ -1,5 +1,8 @@
 import React from 'react';
 import { getAllCourses } from './kursoversiktFunction';
+import {Link} from "react-router-dom";
+import {Card, H3, NavbarButton, Text} from "@dossier/mithra-ui";
+import {Kurs} from "../kurs/kurs";
 
 export class Kursoversikt extends React.Component {
   constructor(props: any) {
@@ -7,10 +10,10 @@ export class Kursoversikt extends React.Component {
 
     this.state = {
       courses: [],
-      error: null
+      error: null,
+      courseDetails: ''
     }
   };
-
 
   async componentDidMount() {
     const courses = await getAllCourses();
@@ -18,12 +21,17 @@ export class Kursoversikt extends React.Component {
     this.setState({courses});
   }
 
+
+  handleClick(courseId: any,) {
+    this.setState({courseDetails: courseId})
+  }
+
   render() {
     const {
       // @ts-ignore
       courses,
       // @ts-ignore
-      error
+      courseDetails
     } = this.state;
     const courseStyles = {
       display: 'flex',
@@ -32,7 +40,7 @@ export class Kursoversikt extends React.Component {
 
     const courseCard = courses
       // @ts-ignore
-      .map(({ course_name, course_description, image_url}) => {
+      .map(({ course_id, course_name, course_description, image_url}) => {
         const styles = {
           fontSize: '16px',
           border: '1px solid black',
@@ -40,7 +48,7 @@ export class Kursoversikt extends React.Component {
           margin: 10,
           overflow: 'hidden',
           maxHeight: '300px',
-          maxWidth: '300px',
+          maxWidth: '300px'
         };
         const imageStyles = {
           maxWidth: '200px',
@@ -48,16 +56,29 @@ export class Kursoversikt extends React.Component {
         }
 
         return (
-          <div style={styles}>
-            <img style={imageStyles} src={image_url}/>
-            <p>{course_name}</p>
-            <p>{course_description}</p>
-          </div>
+
+        <Card
+          style={{
+            maxWidth: '25em',
+            margin: 10,
+          }}
+          onClick={(event) => this.handleClick({course_id}, )}
+        >
+          <img alt="image" style={imageStyles} src={image_url}/>
+          <H3>
+            {course_name}
+          </H3>
+          <Text>
+            {course_description}
+          </Text>
+        </Card>
         );
       });
 
     return(
       // @ts-ignore
+      courseDetails ? <Kurs course={courseDetails}/> :
+        // @ts-ignore
   <div style={courseStyles}>
     {courseCard}
   </div>

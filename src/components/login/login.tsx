@@ -57,27 +57,46 @@ export class Login extends React.Component {
     render() {
         // @ts-ignore
         const {loginError} = this.state
+        const containerStyle = {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100vh',
+            width: '100vw'
+        }
+        const formStyle = {
+            flex: 1,
+            margin: 'auto'
+        }
+        const elementStyle = {
+            textAlign: 'center',
+            margin: 'auto'
+        }
+
         return (
-            <div>
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <Input
-                        id="userName"
-                        placeholder="Enter username..."
-                        onChange={(event) => {
-                            this.handleChange('userName', event)
-                        }}
-                    />
-                    <Input
-                        id="password"
-                        placeholder="Enter password..."
-                        onChange={(event) => {
-                            this.handleChange('password', event)
-                        }}
-                    />
-                    <Button variant="primary" type="submit">
-                        Logg inn
-                    </Button>
-                </form>
+            <div style={containerStyle}>
+                <div style={formStyle}>
+                    {/* @ts-ignore*/}
+                    <form style={elementStyle} onSubmit={this.handleSubmit.bind(this)}>
+                        <Input
+                            id="userName"
+                            placeholder="Enter username..."
+                            onChange={(event) => {
+                                this.handleChange('userName', event)
+                            }}
+                        />
+                        <Input
+                            id="password"
+                            placeholder="Enter password..."
+                            onChange={(event) => {
+                                this.handleChange('password', event)
+                            }}
+                        />
+                        <Button variant="primary" type="submit">
+                            Logg inn
+                        </Button>
+                    </form>
+                </div>
                 {loginError && <h1>{loginError}!</h1>}
             </div>
         );
