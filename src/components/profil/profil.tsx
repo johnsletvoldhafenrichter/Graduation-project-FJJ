@@ -1,7 +1,9 @@
 import React from 'react';
 import jwt_decode from "jwt-decode";
+import {SimpleTable} from "@dossier/mithra-ui";
+
 const axios = require('axios');
-const serverUrl=process.env.REACT_APP_SERVER_URL
+const serverUrl = process.env.REACT_APP_SERVER_URL
 
 
 export class Profile extends React.Component {
@@ -14,7 +16,7 @@ export class Profile extends React.Component {
   }
 
   async getUserInfo(userId: Number) {
-    const result:any = await axios(serverUrl + '/profile', {
+    const result: any = await axios(serverUrl + '/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,14 +34,68 @@ export class Profile extends React.Component {
 
     const userInfo: any = await this.getUserInfo(decoded.id);
     // @ts-ignore
-    this.setState({ userInfo });
+    this.setState({userInfo});
   }
 
-  render () {
+  render() {
     // @ts-ignore
-    const user = this.state.userInfo
+    const user = this.state.userInfo;
+    console.log(user);
     return (
-      <div> Hei {user.first_name} {user.last_name}, velkommen til din profil</div>
+      <>
+        <SimpleTable>
+          <tbody>
+          <tr>
+            <th>
+              Navn:
+            </th>
+            <td>
+              {user.first_name} {user.last_name}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Epost:
+            </th>
+            <td>
+              {user.email}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Telefon:
+            </th>
+            <td>
+              {user.phone_number}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Specialization:
+            </th>
+            <td>
+              {user.specialization_name}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Position:
+            </th>
+            <td>
+              {user.position_name}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              Location:
+            </th>
+            <td>
+              {user.location_name}
+            </td>
+          </tr>
+          </tbody>
+        </SimpleTable>
+      </>
     )
   }
 }
