@@ -1,21 +1,22 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
 } from "react-router-dom";
 import "@dossier/mithra-ui/dist/ds.css"
 import {
-  ApplicationLayout,
-  PageHeaderButton,
-  NavbarSection,
-  NavbarButton,
+    ApplicationLayout,
+    PageHeaderButton,
+    NavbarSection,
+    NavbarButton,
 } from "@dossier/mithra-ui";
 
 
 import {Dinsideauth} from "./dinside/dinsideauth";
 import {Profile} from './profil/profil';
+import {logoutfunction} from "./login/logoutfunction";
 
 export default class Main extends React.Component {
   render() {
@@ -59,6 +60,7 @@ export default class Main extends React.Component {
                     as={Link}
                     to="/profile"/>
                   <NavbarButton
+                    onClick={() => logoutfunction()}
                     icon="Logout"
                     text="Logg ut"/>
                 </NavbarSection>
