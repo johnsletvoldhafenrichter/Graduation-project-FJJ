@@ -28,3 +28,4 @@ export function checkSession() {
   })
     .then((res: any) => res.status === 200);
 }
+
