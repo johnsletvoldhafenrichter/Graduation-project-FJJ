@@ -15,7 +15,13 @@ import {
 
 
 import {Dinsideauth} from "./dinside/dinsideauth";
+<<<<<<< Updated upstream
 import {Profile} from './profil/profil';
+=======
+import {Profileauth} from './profil/porfileauth';
+import {logoutfunction} from "./login/logoutfunction";
+import {Kursoversiktauth} from "./kursoversikt/kursoversiktauth";
+>>>>>>> Stashed changes
 
 export default class Main extends React.Component {
   render() {
@@ -52,13 +58,21 @@ export default class Main extends React.Component {
                     text="Mine kurs"/>
                   <NavbarButton
                     icon="Learn"
-                    text="Kursoversikt"/>
+                    text="Kursoversikt"
+                    as={Link}
+                    to="/kursoversikt"/>
                   <NavbarButton
                     icon="User"
                     text="Profil"
                     as={Link}
                     to="/profile"/>
                   <NavbarButton
+<<<<<<< Updated upstream
+=======
+                    onClick={() => {
+                      logoutfunction();
+                    }}
+>>>>>>> Stashed changes
                     icon="Logout"
                     text="Logg ut"/>
                 </NavbarSection>
@@ -76,10 +90,13 @@ export default class Main extends React.Component {
                 <div>Hei dette er din side!</div>
               </Route>
               <Route path="/logout">
-                <Dinsideauth />
+                <Dinsideauth/>
               </Route>
               <Route path="/profile">
-                <Profile/>
+                <Profileauth/>
+              </Route>
+              <Route path="/kursoversikt">
+                <Kursoversiktauth/>
               </Route>
             </Switch>
           </div>

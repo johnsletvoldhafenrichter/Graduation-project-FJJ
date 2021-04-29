@@ -3,7 +3,7 @@ import {checkSession} from "../login/loginFunctions";
 import {Profile} from './profil';
 import {Login} from "../login/login";
 
-export class Profilauth extends React.Component {
+export class Profileauth extends React.Component {
   constructor(props: any) {
     super(props);
 

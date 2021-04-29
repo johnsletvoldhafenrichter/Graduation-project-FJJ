@@ -11,7 +11,8 @@ export class Profile extends React.Component {
     super(props);
 
     this.state = {
-      userInfo: {}
+      userInfo: {},
+      loginError: ''
     }
   }
 
@@ -24,7 +25,7 @@ export class Profile extends React.Component {
       },
       data: {userId}
     })
-    return result.data;
+    return result;
   }
 
 
@@ -32,15 +33,26 @@ export class Profile extends React.Component {
     const token: any = localStorage.getItem('dossier_session_token')
     const decoded: any = jwt_decode(token);
 
-    const userInfo: any = await this.getUserInfo(decoded.id);
-    // @ts-ignore
-    this.setState({userInfo});
+      try {
+        const userInfoResult: any = await this.getUserInfo(decoded.id);
+        const userInfo = userInfoResult.data
+        this.setState({userInfo});
+      } catch (error) {
+        this.setState({
+          loginError: 'error'
+        })
+        return;
+      }
   }
 
   render() {
     // @ts-ignore
     const user = this.state.userInfo;
-    console.log(user);
+    // @ts-ignore
+    const {loginError} = this.state
+    if (loginError) {
+      return <div>Error!</div>
+    }
     return (
       <>
         <SimpleTable>

@@ -32,6 +32,7 @@ export class Login extends React.Component {
       // @ts-ignore
     } = this.state.loginInfo;
 
+<<<<<<< Updated upstream
       const result = await requestSessionToken(
         userName,
         password
@@ -46,6 +47,26 @@ export class Login extends React.Component {
       window.location.reload();
     } catch(error: any) {
       console.log(error)
+=======
+        const result = await requestSessionToken(
+            userName,
+            password
+        )
+        if (result.error) {
+            this.setState({
+                loginError: 'Something went wrong!'
+            })
+            return;
+        }
+        if (!result.token) {
+            this.setState({
+                loginError: 'Unauthorized!'
+            })
+            return;
+        }
+        localStorage.setItem('dossier_session_token', result.token);
+        window.location.reload();
+>>>>>>> Stashed changes
     }
 
   render() {
