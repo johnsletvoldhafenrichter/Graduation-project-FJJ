@@ -1,6 +1,6 @@
 import React from 'react';
 import {checkSession} from "../login/loginFunctions";
-import {Profil} from './profil';
+import {Profile} from './profil';
 import {Login} from "../login/login";
 
 export class Profilauth extends React.Component {
@@ -26,7 +26,7 @@ export class Profilauth extends React.Component {
     const {isAuthenticated} = this.state
     return (
       isAuthenticated ?
-        <Profil/> :
+        <Profile/> :
         <Login/>
     )
   }

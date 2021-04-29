@@ -15,7 +15,7 @@ import {
 
 
 import {Dinsideauth} from "./dinside/dinsideauth";
-import {Profil} from './profil/profil';
+import {Profile} from './profil/profil';
 
 export default class Main extends React.Component {
   render() {
@@ -57,7 +57,7 @@ export default class Main extends React.Component {
                     icon="User"
                     text="Profil"
                     as={Link}
-                    to="/profil"/>
+                    to="/profile"/>
                   <NavbarButton
                     icon="Logout"
                     text="Logg ut"/>
@@ -78,8 +78,8 @@ export default class Main extends React.Component {
               <Route path="/logout">
                 <Dinsideauth />
               </Route>
-              <Route path="/profil">
-                <Profil/>
+              <Route path="/profile">
+                <Profile/>
               </Route>
             </Switch>
           </div>
