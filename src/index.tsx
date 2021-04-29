@@ -8,8 +8,6 @@ import {MithraProvider} from "@dossier/mithra-ui";
 
 config();
 
-console.log("?????????")
-
 ReactDOM.render(
     <React.StrictMode>
         <MithraProvider>
