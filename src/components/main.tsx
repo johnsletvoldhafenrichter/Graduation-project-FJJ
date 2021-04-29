@@ -13,7 +13,9 @@ import {
   NavbarButton,
 } from "@dossier/mithra-ui";
 
+
 import {Dinsideauth} from "./dinside/dinsideauth";
+import {Profil} from './profil/profil';
 
 export default class Main extends React.Component {
   render() {
@@ -53,7 +55,9 @@ export default class Main extends React.Component {
                     text="Kursoversikt"/>
                   <NavbarButton
                     icon="User"
-                    text="Profil"/>
+                    text="Profil"
+                    as={Link}
+                    to="/profil"/>
                   <NavbarButton
                     icon="Logout"
                     text="Logg ut"/>
@@ -73,6 +77,9 @@ export default class Main extends React.Component {
               </Route>
               <Route path="/logout">
                 <Dinsideauth />
+              </Route>
+              <Route path="/profil">
+                <Profil/>
               </Route>
             </Switch>
           </div>
