@@ -1,24 +1,24 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
 } from "react-router-dom";
 import "@dossier/mithra-ui/dist/ds.css"
 import {
-    ApplicationLayout,
-    PageHeaderButton,
-    NavbarSection,
-    NavbarButton,
+  ApplicationLayout,
+  PageHeaderButton,
+  NavbarSection,
+  NavbarButton,
 } from "@dossier/mithra-ui";
 
 
-import {Dinsideauth} from "./dinside/dinsideauth";
-import {Profileauth} from './profil/porfileauth';
+import {DinSide} from "./dinside";
+import {Profile} from './profil';
 import {logoutfunction} from "./login/logoutfunction";
-import {Kursoversiktauth} from "./kursoversikt/kursoversiktauth";
-import {Kurs} from "./kurs/kurs";
+import {Kursoversikt} from "./kursoversikt";
+import {Kurs} from "./kurs";
 
 export default class Main extends React.Component {
   render() {
@@ -49,12 +49,13 @@ export default class Main extends React.Component {
                     icon="UserPlans"
                     text="Mine kurs"
                     as={Link}
-                    to="/course"/>
+                    to="/mycourses"
+                  />
                   <NavbarButton
                     icon="Learn"
                     text="Kursoversikt"
                     as={Link}
-                    to="/kursoversikt"/>
+                    to="/courses"/>
                   <NavbarButton
                     icon="User"
                     text="Profil"
@@ -75,17 +76,27 @@ export default class Main extends React.Component {
           isMainPage>
           <div className="App ds-typography-body" style={{padding: '0px'}}>
             <Switch>
-              <Route path="/dinside">
-                <div>Hei dette er din side!</div>
+              <Route path="/dinside"
+                     render={(props) => (
+                       <DinSide {...props}/>
+                     )}>
               </Route>
-              <Route path="/logout">
-                <Dinsideauth/>
+              <Route path='/profile'
+                     render={(props) => (
+                       <Profile {...props}/>
+                     )}>
               </Route>
-              <Route path="/profile">
-                <Profileauth/>
+              <Route
+                path='/courses'
+                render={(props) => (
+                  <Kursoversikt {...props}/>
+                )}>
               </Route>
-              <Route path="/kursoversikt">
-                <Kursoversiktauth/>
+              <Route
+                path='/coursedetails/:id'
+                render={(props) => (
+                  <Kurs {...props}/>
+                )}>
               </Route>
             </Switch>
           </div>
