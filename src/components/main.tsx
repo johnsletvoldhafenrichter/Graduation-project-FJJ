@@ -31,10 +31,18 @@ export default class Main extends React.Component {
     }
 
     changeTray(trayName: string, event: any): void {
-        this.setState({
-            //@ts-ignore
-            trayState: <Filter closeFunction={this.closeTray.bind(this)} />
-        })
+        //@ts-ignore
+        if (!this.state.trayState) {
+            this.setState({
+                //@ts-ignore
+                trayState: <Filter closeFunction={this.closeTray.bind(this)} />
+            })
+            return;
+        } else {
+            this.setState({
+                trayState: null,
+            })
+        }
 
     }
 
