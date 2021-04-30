@@ -73,7 +73,7 @@ export default class Main extends React.Component {
               null
             }
           isMainPage>
-          <div className="App ds-typography-body">
+          <div className="App ds-typography-body" style={{padding: '0px'}}>
             <Switch>
               <Route path="/dinside">
                 <div>Hei dette er din side!</div>
