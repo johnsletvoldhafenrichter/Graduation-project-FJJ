@@ -14,6 +14,14 @@ export class Filter extends React.Component<any, any> {
             activeTab: str,
         })
     }
+
+    componentDidMount() {
+        const path = window.location.pathname;
+        if (path === "/courses") {
+            console.log("hei!")
+        }
+    }
+
     render() {
         const close = this.props.closeFunction
 
