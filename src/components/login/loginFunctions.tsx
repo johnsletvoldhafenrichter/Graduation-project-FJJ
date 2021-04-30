@@ -7,7 +7,6 @@ export async function requestSessionToken (userName: string, password: string){
     password: password
   })
       .then(function (response: any) {
-          console.log(response)
         return response.data;
       })
       .catch(function (error: any) {

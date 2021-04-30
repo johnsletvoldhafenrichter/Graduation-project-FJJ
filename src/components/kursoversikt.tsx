@@ -77,6 +77,7 @@ export class Kursoversikt extends React.Component {
                         style={{
                             maxWidth: '25em',
                             margin: 10,
+                            flexDirection: 'row'
                         }}
                         onClick={(event) => this.handleClick(course_id, course_name)}
                     >

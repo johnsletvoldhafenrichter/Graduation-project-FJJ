@@ -51,6 +51,7 @@ export class Login extends React.Component {
             return;
         }
         localStorage.setItem('dossier_session_token', result.token);
+        localStorage.setItem('session_user_id', result.id);
         window.location.reload();
     }
 
