@@ -12,18 +12,17 @@ export class Kurs extends React.Component {
   }
 
   async componentDidMount() {
-    // @ts-ignore
-    const courseId = this.props.course.course_id
-    const course = await getCourseById(courseId);
+    //@ts-ignore
+    const {id} = this.props.match.params;
+    const course = await getCourseById(id);
 
     this.setState({course:course.data})
   }
 
 
   render() {
-    console.log(this.props)
-    // @ts-ignore
-    const courseDetail = this.state.course
+    //@ts-ignore
+    const courseDetail = this.state.course;
       return (
         <>
         <img src={courseDetail.image_url} alt="eat my shit"/>

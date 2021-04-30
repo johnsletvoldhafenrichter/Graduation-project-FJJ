@@ -19,6 +19,7 @@ export class Kursoversiktauth extends React.Component {
     if (checkForAuthentication) {
       this.setState({ isAuthenticated: true });
     }
+
   }
 
   render() {
@@ -26,8 +27,8 @@ export class Kursoversiktauth extends React.Component {
     const {isAuthenticated} = this.state
     return (
       isAuthenticated ?
-        <Kursoversikt/> :
-        <Login/>
+        <Kursoversikt {...this.props}/> :
+        <Login {...this.props}/>
     )
   }
 }

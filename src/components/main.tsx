@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
 } from "react-router-dom";
 import "@dossier/mithra-ui/dist/ds.css"
 import {
-    ApplicationLayout,
-    PageHeaderButton,
-    NavbarSection,
-    NavbarButton,
+  ApplicationLayout,
+  PageHeaderButton,
+  NavbarSection,
+  NavbarButton,
 } from "@dossier/mithra-ui";
 
 
@@ -48,13 +48,12 @@ export default class Main extends React.Component {
                   <NavbarButton
                     icon="UserPlans"
                     text="Mine kurs"
-                    as={Link}
-                    to="/course"/>
+                  />
                   <NavbarButton
                     icon="Learn"
                     text="Kursoversikt"
                     as={Link}
-                    to="/kursoversikt"/>
+                    to="/courses"/>
                   <NavbarButton
                     icon="User"
                     text="Profil"
@@ -75,17 +74,27 @@ export default class Main extends React.Component {
           isMainPage>
           <div className="App ds-typography-body">
             <Switch>
-              <Route path="/dinside">
-                <div>Hei dette er din side!</div>
+              <Route path="/dinside"
+                     render={(props) => (
+                       <Dinsideauth {...props}/>
+                     )}>
               </Route>
-              <Route path="/logout">
-                <Dinsideauth/>
+              <Route path='/profile'
+                     render={(props) => (
+                       <Profileauth {...props}/>
+                     )}>
               </Route>
-              <Route path="/profile">
-                <Profileauth/>
+              <Route
+                path='/courses'
+                render={(props) => (
+                  <Kursoversiktauth {...props}/>
+                )}>
               </Route>
-              <Route path="/kursoversikt">
-                <Kursoversiktauth/>
+              <Route
+                path='/coursedetails/:id'
+                render={(props) => (
+                  <Kurs {...props}/>
+                )}>
               </Route>
             </Switch>
           </div>

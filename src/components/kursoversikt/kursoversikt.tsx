@@ -11,7 +11,6 @@ export class Kursoversikt extends React.Component {
     this.state = {
       courses: [],
       error: null,
-      courseDetails: ''
     }
   };
 
@@ -22,8 +21,10 @@ export class Kursoversikt extends React.Component {
   }
 
 
-  handleClick(courseId: any,) {
-    this.setState({courseDetails: courseId})
+  handleClick(courseId: any, course_name: string) {
+    // @ts-ignore
+    const{ history}  = this.props;
+    history.push("/coursedetails/" + courseId);
   }
 
   render() {
@@ -62,7 +63,7 @@ export class Kursoversikt extends React.Component {
             maxWidth: '25em',
             margin: 10,
           }}
-          onClick={(event) => this.handleClick({course_id}, )}
+          onClick={(event) => this.handleClick(course_id,  course_name)}
         >
           <img alt="image" style={imageStyles} src={image_url}/>
           <H3>

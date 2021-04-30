@@ -19,6 +19,7 @@ export class Dinsideauth extends React.Component {
         if (checkForAuthentication) {
             this.setState({ isAuthenticated: true });
         }
+        console.trace(this.props, "hei");
     }
 
     render() {
