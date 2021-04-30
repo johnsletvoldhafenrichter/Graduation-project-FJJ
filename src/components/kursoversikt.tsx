@@ -11,19 +11,32 @@ export class Kursoversikt extends React.Component {
         this.state = {
             courses: [],
             error: null,
-            courseDetails: ''
         }
     };
 
     async componentDidMount() {
-        const courses = await getAllCourses();
-        // @ts-ignore
-        this.setState({courses});
+        try {
+            const courses = await getAllCourses();
+            if (!courses) {
+                this.setState({
+                    error: 'Could not find courses!'
+                })
+                return;
+            }
+            // @ts-ignore
+            this.setState({courses});
+        } catch (error) {
+            this.setState({
+                error: 'Something went wrong!'
+            })
+            return;
+        }
     }
 
-
-    handleClick(courseId: any,) {
-        this.setState({courseDetails: courseId})
+    handleClick(courseId: number) {
+        // @ts-ignore
+        const {history} = this.props;
+        history.push("/coursedetails/" + courseId);
     }
 
     render() {
@@ -130,10 +143,6 @@ export class Kursoversikt extends React.Component {
                     <Text style={H6Styles}>
                         Tilbyder: {org}
                     </Text>
-
-
-
-
                 </Card>
               );
           });
