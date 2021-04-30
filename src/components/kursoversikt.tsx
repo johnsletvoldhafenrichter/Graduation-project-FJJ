@@ -33,7 +33,7 @@ export class Kursoversikt extends React.Component {
     }
 
 
-    handleClick(courseId: any, course_name: string) {
+    handleClick(courseId: number) {
         // @ts-ignore
         const {history} = this.props;
         history.push("/coursedetails/" + courseId);
@@ -78,7 +78,7 @@ export class Kursoversikt extends React.Component {
                             maxWidth: '25em',
                             margin: 10,
                         }}
-                        onClick={(event) => this.handleClick(course_id, course_name)}
+                        onClick={() => this.handleClick(course_id)}
                     >
                         <img alt="image" style={imageStyles} src={image_url}/>
                         <H3>
