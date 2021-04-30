@@ -35,11 +35,17 @@ export class Profile extends React.Component {
 
       try {
         const userInfoResult: any = await this.getUserInfo(decoded.id);
+        if (!userInfoResult) {
+          this.setState({
+            loginError: 'Could not find user!'
+          })
+          return;
+        }
         const userInfo = userInfoResult.data
         this.setState({userInfo});
       } catch (error) {
         this.setState({
-          loginError: 'error'
+          loginError: 'Something went wrong!'
         })
         return;
       }
@@ -51,7 +57,7 @@ export class Profile extends React.Component {
     // @ts-ignore
     const {loginError} = this.state
     if (loginError) {
-      return <div>Error!</div>
+      return <div>{loginError}!</div>
     }
     return (
       <>
