@@ -1,7 +1,7 @@
 import React from 'react';
-import {getAllCourses} from './kursoversiktFunction';
+import {getAllCourses} from '../functions/kursoversiktFunction';
 import {Card, H3, Text} from "@dossier/mithra-ui";
-import {Kurs} from "../kurs/kurs";
+import {Kurs} from "./kurs";
 
 export class Kursoversikt extends React.Component {
     constructor(props: any) {

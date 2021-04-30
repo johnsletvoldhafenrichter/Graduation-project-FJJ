@@ -1,4 +1,4 @@
-import {getCourseById} from "./kursFunctions";
+import {getCourseById} from "../functions/kursFunctions";
 import React from "react";
 import {SimpleTable} from "@dossier/mithra-ui";
 

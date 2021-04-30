@@ -14,11 +14,11 @@ import {
 } from "@dossier/mithra-ui";
 
 
-import {DinSide} from "./dinside/dinside";
-import {Profile} from './profil/profil';
+import {DinSide} from "./dinside";
+import {Profile} from './profil';
 import {logoutfunction} from "./login/logoutfunction";
-import {Kursoversikt} from "./kursoversikt/kursoversikt";
-import {Kurs} from "./kurs/kurs";
+import {Kursoversikt} from "./kursoversikt";
+import {Kurs} from "./kurs";
 
 export default class Main extends React.Component {
   render() {
