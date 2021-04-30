@@ -97,7 +97,7 @@ export default class Main extends React.Component {
                     pageType="user"
                     tray={tray}
                     isMainPage>
-                    <div className="App ds-typography-body">
+                    <div className="App ds-typography-body" style={{padding: '0px'}}>
                         <Switch>
                             <Route path="/dinside"
                                    render={(props) => (
