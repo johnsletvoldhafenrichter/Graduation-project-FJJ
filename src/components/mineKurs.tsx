@@ -17,7 +17,6 @@ export class MineKurs extends React.Component{
   // /mycourses skal console.log som første operasjon, men nei... wtf??
 
   async getStartedCourses(userId: Number) {
-    console.log('function working');      // kommer i konsollen
     const result: any = await axios(serverUrl + '/mycourses', {
       method: 'POST',
       headers: {
@@ -26,28 +25,38 @@ export class MineKurs extends React.Component{
       },
       data: {userId}
     })
-    console.log('end of function');  // kommer ikke i konsollen
     return result.data;
   };
 
   async componentDidMount() {
-    const userId:any = localStorage.getItem('session_user_id');
+    try {
+      const userId:any = localStorage.getItem('session_user_id');
+      const myStartedCourses = await this.getStartedCourses(userId);
+      if (!myStartedCourses) {
+        this.setState({
+          error: 'Could not find courses!'
+        })
+        return;
+      }
+      this.setState({myStartedCourses});
 
-    const myStartedCourses = await this.getStartedCourses(userId);
-    console.log(myStartedCourses);
-    this.setState({myStartedCourses});
-
-    console.log(myStartedCourses);
+      console.log(myStartedCourses);
+    } catch (error) {
+      this.setState({
+        error: 'Component did not mount!'
+      })
+      return;
+    }
   }
 
   render() {
 
     // @ts-ignore
     const {myStartedCourses} = this.state;
-    // console.trace(myStartedCourses);
 
 
     return(
+
       <div>
         Her kommer alle de kule kursene dine!
       </div>
