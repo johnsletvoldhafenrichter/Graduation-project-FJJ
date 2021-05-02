@@ -46,3 +46,11 @@
 .enrollmentContainer {
     margin: 5px 0;
 }
+
+/*For the display window. Insert into final return in render method*/
+.coursesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}

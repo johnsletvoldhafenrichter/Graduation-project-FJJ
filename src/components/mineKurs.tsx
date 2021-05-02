@@ -1,4 +1,6 @@
 import React from "react";
+import {getCourseById} from "../functions/kursFunctions";
+import {Card, H5, H6, SubTitle2, Text} from "@dossier/mithra-ui";
 
 
 const axios = require('axios');
@@ -12,9 +14,6 @@ export class MineKurs extends React.Component{
       error: null
     }
   };
-
-  //mycourses-endepunktet gir en 404, men funksjonen går gjennom med /courses som endepunkt.
-  // /mycourses skal console.log som første operasjon, men nei... wtf??
 
   async getStartedCourses(userId: Number) {
     const result: any = await axios(serverUrl + '/mycourses', {
@@ -40,7 +39,6 @@ export class MineKurs extends React.Component{
       }
       this.setState({myStartedCourses});
 
-      console.log(myStartedCourses);
     } catch (error) {
       this.setState({
         error: 'Component did not mount!'
@@ -50,15 +48,52 @@ export class MineKurs extends React.Component{
   }
 
   render() {
-
     // @ts-ignore
     const {myStartedCourses} = this.state;
+    const courseCard = myStartedCourses
+      // @ts-ignore
+      .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
+        return (
+          // @ts-ignore
+          <Card className={'card'} onClick={(event) => this.handleClick(course_id)}>
+            <img className={'imageStyles'} alt="image" src={image_url}/>
+            <H5 className={'H5Style'}>
+              {course_name}
+            </H5>
+            <div className={'dateContainer'}>
+              <Text className={'dateStyles'}>
+                <SubTitle2 className={'dateTitleStyle'}>
+                  Start dato
+                </SubTitle2>
+                {start_date.slice(0, 10)}
+              </Text>
+              <Text className={'dateStyles'}>
+                <SubTitle2 className={'dateTitleStyle'}>
+                  Slutt dato
+                </SubTitle2>
+                {end_date.slice(0, 10)}
+              </Text>
+            </div>
+            <div className={'enrollmentContainer'}>
+              <H6 className={'H6Styles'}>
+                Oppmeldingsfrist
+              </H6>
+              <H6 className={'dateTitleStyle'}>
+                {enrollment_end.slice(0, 10)}
+              </H6>
+            </div>
+            <Text className={'H6Styles'}>
+              Tilbyder: {org}
+            </Text>
+          </Card>
+        );
+      });
+
 
 
     return(
-
-      <div>
-        Her kommer alle de kule kursene dine!
+      <div className={'coursesContainer'}>
+        {courseCard}
       </div>
     );
   }
