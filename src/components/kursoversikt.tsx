@@ -1,6 +1,6 @@
 import React from 'react';
 import {getAllCourses} from '../functions/kursoversiktFunction';
-import {Card, H5, SubTitle, Text, H6, SubTitle2} from "@dossier/mithra-ui";
+import {Card, H5, Text, H6, SubTitle2} from "@dossier/mithra-ui";
 import {Kurs} from "./kurs";
 import '../css/courseCards.css';
 

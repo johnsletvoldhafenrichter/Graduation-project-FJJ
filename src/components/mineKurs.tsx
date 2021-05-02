@@ -1,36 +1,28 @@
 import React from "react";
-import {getCourseById} from "../functions/kursFunctions";
-import {Card, H5, H6, SubTitle2, Text} from "@dossier/mithra-ui";
+import {getStartedCoursesByUserId} from "../functions/mineKursFunctions";
+import {Card, H5, H6, SubTitle2, Text, Stack, Tab} from "@dossier/mithra-ui";
+import {Switch} from "react-router-dom";
 
-
-const axios = require('axios');
-const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 export class MineKurs extends React.Component{
   constructor(props: any) {
     super(props);
     this.state = {
       myStartedCourses: [],
-      error: null
+      error: null,
+      activeTab: 'startedCourses',
     }
   };
-
-  async getStartedCourses(userId: Number) {
-    const result: any = await axios(serverUrl + '/mycourses', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Auth-Token': localStorage.getItem('dossier_session_token')
-      },
-      data: {userId}
+  handleClick(str:string) {
+    this.setState({
+      activeTab: str,
     })
-    return result.data;
-  };
+  }
 
   async componentDidMount() {
     try {
       const userId:any = localStorage.getItem('session_user_id');
-      const myStartedCourses = await this.getStartedCourses(userId);
+      const myStartedCourses = await getStartedCoursesByUserId(userId);
       if (!myStartedCourses) {
         this.setState({
           error: 'Could not find courses!'
@@ -49,8 +41,8 @@ export class MineKurs extends React.Component{
 
   render() {
     // @ts-ignore
-    const {myStartedCourses} = this.state;
-    const courseCard = myStartedCourses
+    const {myStartedCourses, activeTab} = this.state;
+    const startedCourseCard = myStartedCourses
       // @ts-ignore
       .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
         return (
@@ -90,10 +82,48 @@ export class MineKurs extends React.Component{
       });
 
 
-
     return(
-      <div className={'coursesContainer'}>
-        {courseCard}
+      <div>
+        <Stack style={{justifyContent: 'center'}}>
+          <Tab
+            active={activeTab === "enrolledCourses"}
+            onClick={() => this.handleClick("enrolledCourses")}
+          >
+            Påmeldte kurs
+          </Tab>
+          <Tab
+            active={activeTab === "startedCourses"}
+            onClick={() => this.handleClick("startedCourses")}
+          >
+            Påbegynte kurs
+          </Tab>
+          <Tab
+            active={activeTab === "competedCourses"}
+            onClick={() => this.handleClick("competedCourses")}
+          >
+            Fullførte kurs
+          </Tab>
+        </Stack>
+
+        {
+          // @ts-ignore
+          {
+            'enrolledCourses': <div>enrolledCourses</div>,
+            'startedCourses':
+                  <div className={'coursesContainer'}>
+                    {startedCourseCard}
+                  </div>,
+            'competedCourses': <div>competedCourses</div>
+
+          }[activeTab]
+        }
+
+
+
+
+
+
+
       </div>
     );
   }
