@@ -20,6 +20,7 @@ import {logoutfunction} from "./login/logoutfunction";
 import {Kursoversikt} from "./kursoversikt";
 import {Kurs} from "./kurs";
 import {Filter} from "./filter";
+import {MineKurs} from './mineKurs';
 
 export default class Main extends React.Component {
     constructor(props: any) {
@@ -128,6 +129,12 @@ export default class Main extends React.Component {
                                 render={(props) => (
                                     <Kurs {...props}/>
                                 )}>
+                            </Route>
+                            <Route
+                              path='/mycourses'
+                              render={(props) => (
+                                <MineKurs {...props}/>
+                              )}>
                             </Route>
                         </Switch>
                     </div>

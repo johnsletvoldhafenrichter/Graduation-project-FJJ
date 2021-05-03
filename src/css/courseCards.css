@@ -1,0 +1,56 @@
+
+.card {
+    max-width: 15em;
+    height: 20em;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+
+    box-shadow: 0 4px 8px rgba(37, 40, 43, 0.25);
+}
+
+.imageStyles {
+    flex: 1;
+    max-width: 10em;
+    max-height: 7em;
+    margin: 10px 0
+}
+
+.H5Style {
+    flex: 1;
+    min-height: 2.5em;
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+.dateContainer {
+    flex: 1;
+    width: 100%;
+    display: flex;
+}
+.dateStyles {
+    width: 50%;
+    margin: 0 5px;
+    font-size: 11px;
+}
+.dateTitleStyle {
+    margin: 0;
+    font-size: 12px;
+}
+.H6Styles {
+    margin: 0;
+    font-size: 12px;
+}
+.enrollmentContainer {
+    margin: 5px 0;
+}
+
+/*For the display window. Insert into final return in render method*/
+.coursesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
