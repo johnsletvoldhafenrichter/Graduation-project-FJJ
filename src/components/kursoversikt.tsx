@@ -1,5 +1,4 @@
 import React from 'react';
-import {getAllCourses} from '../functions/kursoversiktFunction';
 import {Card, H5, Text, H6, SubTitle2} from "@dossier/mithra-ui";
 import {Kurs} from "./kurs";
 import '../css/courseCards.css';
@@ -8,29 +7,9 @@ export class Kursoversikt extends React.Component {
   constructor(props: any) {
     super(props);
     this.state = {
-      courses: [],
       error: null,
     }
   };
-
-  async componentDidMount() {
-    try {
-      const courses = await getAllCourses();
-      if (!courses) {
-        this.setState({
-          error: 'Could not find courses!'
-        })
-        return;
-      }
-      // @ts-ignore
-      this.setState({courses});
-    } catch (error) {
-      this.setState({
-        error: 'Something went wrong!'
-      })
-      return;
-    }
-  }
 
   handleClick(courseId: number) {
     // @ts-ignore
@@ -40,9 +19,12 @@ export class Kursoversikt extends React.Component {
 
   render() {
     // @ts-ignore
-    const {courses, courseDetails} = this.state;
+    const {error, courseDetails} = this.state;
     // @ts-ignore
-    const {error} = this.state
+    let {courses, searchValues} = this.props;
+    if (searchValues.length > 0) {
+      courses = searchValues;
+    }
     if (error) {
       return <div>{error}!</div>
     }
@@ -51,8 +33,8 @@ export class Kursoversikt extends React.Component {
       .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
         return (
           // @ts-ignore
-          <Card className={'card'} onClick={(event) => this.handleClick(course_id)}>
-            <img className={'imageStyles'} alt="image" src={image_url}/>
+          <Card className={'card'} onClick={(event) => this.handleClick(course_id)} key={course_id}>
+            <img className={'imageStyles'} alt="amazingeness" src={image_url}/>
             <H5 className={'H5Style'}>
               {course_name}
             </H5>
