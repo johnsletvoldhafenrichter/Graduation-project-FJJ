@@ -22,7 +22,9 @@ export class Kursoversikt extends React.Component {
     const {error, courseDetails} = this.state;
     // @ts-ignore
     let {courses, searchValues} = this.props;
-    if (searchValues.length > 0) {
+    if (searchValues === null) {
+      return <div>Nothing found!</div>
+    } else if (searchValues.length > 0) {
       courses = searchValues;
     }
     if (error) {
@@ -35,7 +37,7 @@ export class Kursoversikt extends React.Component {
           // @ts-ignore
           <Card className={'card'} onClick={(event) => this.handleClick(course_id)} key={course_id}>
             <img className={'imageStyles'} alt="amazingeness" src={image_url}/>
-            <H5 className={'H5Style'}>
+            <H5 className={'H5Style truncate'}>
               {course_name}
             </H5>
             <div className={'dateContainer'}>

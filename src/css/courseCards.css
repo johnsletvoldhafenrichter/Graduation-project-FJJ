@@ -1,14 +1,20 @@
 
 .card {
-    max-width: 15em;
+    width: 15em;
     height: 20em;
     margin: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 5px;
-
     box-shadow: 0 4px 8px rgba(37, 40, 43, 0.25);
+}
+
+.truncate {
+    width: 15em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .imageStyles {
