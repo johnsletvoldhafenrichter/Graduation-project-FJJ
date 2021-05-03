@@ -1,48 +1,48 @@
 import React from "react";
-import {getStartedCoursesByUserId} from "../functions/mineKursFunctions";
+import {getCourses} from "../functions/mineKursFunctions";
 import {Card, H5, H6, SubTitle2, Text, Stack, Tab} from "@dossier/mithra-ui";
-import {Switch} from "react-router-dom";
-
 
 export class MineKurs extends React.Component{
   constructor(props: any) {
     super(props);
     this.state = {
-      myStartedCourses: [],
+      myCourses: [],
       error: null,
       activeTab: 'startedCourses',
     }
   };
-  handleClick(str:string) {
+
+  async handleClick(str:string) {
     this.setState({
       activeTab: str,
     })
-  }
+    // @ts-ignore
+    const courses = await getCourses(str);
+    if(courses.error) {
+      this.setState({error:courses.error})
+    }
+    this.setState({myCourses: courses});
+  };
 
   async componentDidMount() {
-    try {
-      const userId:any = localStorage.getItem('session_user_id');
-      const myStartedCourses = await getStartedCoursesByUserId(userId);
-      if (!myStartedCourses) {
-        this.setState({
-          error: 'Could not find courses!'
-        })
-        return;
-      }
-      this.setState({myStartedCourses});
-
-    } catch (error) {
-      this.setState({
-        error: 'Component did not mount!'
-      })
-      return;
+    // @ts-ignore
+    const {activeTab} = this.state;
+    const courses = await getCourses(activeTab);
+    if(courses.error) {
+      this.setState({error:courses.error})
     }
+    this.setState({myCourses: courses});
   }
 
   render() {
     // @ts-ignore
-    const {myStartedCourses, activeTab} = this.state;
-    const startedCourseCard = myStartedCourses
+    const {error} = this.state;
+    if(error) {
+      return <div>ERROR!!!</div>
+    }
+    // @ts-ignore
+    const {myCourses: myCourses, activeTab} = this.state;
+    const courseCard = myCourses
       // @ts-ignore
       .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
         return (
@@ -81,9 +81,10 @@ export class MineKurs extends React.Component{
         );
       });
 
-
     return(
       <div>
+
+        {/*Tab buttons*/}
         <Stack style={{justifyContent: 'center'}}>
           <Tab
             active={activeTab === "enrolledCourses"}
@@ -105,27 +106,12 @@ export class MineKurs extends React.Component{
           </Tab>
         </Stack>
 
-        {
-          // @ts-ignore
-          {
-            'enrolledCourses': <div>enrolledCourses</div>,
-            'startedCourses':
-                  <div className={'coursesContainer'}>
-                    {startedCourseCard}
-                  </div>,
-            'competedCourses': <div>competedCourses</div>
-
-          }[activeTab]
-        }
-
-
-
-
-
-
+        {/*Card view*/}
+        <div className={'coursesContainer'}>
+          {courseCard}
+        </div>
 
       </div>
     );
   }
-
 }
