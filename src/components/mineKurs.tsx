@@ -41,14 +41,14 @@ export class MineKurs extends React.Component{
       return <div>ERROR!!!</div>
     }
     // @ts-ignore
-    const {myCourses: myCourses, activeTab} = this.state;
+    const {myCourses, activeTab} = this.state;
     const courseCard = myCourses
       // @ts-ignore
       .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
         return (
           // @ts-ignore
-          <Card className={'card'} onClick={(event) => this.handleClick(course_id)}>
-            <img className={'imageStyles'} alt="image" src={image_url}/>
+          <Card className={'card'} onClick={(event) => this.handleClick(course_id)} key={course_id}>
+            <img className={'imageStyles'} alt="amazingeness" src={image_url}/>
             <H5 className={'H5Style'}>
               {course_name}
             </H5>

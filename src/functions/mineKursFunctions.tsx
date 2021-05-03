@@ -45,14 +45,12 @@ export async function getCourses(activeTab: string) {
       return({
         error: 'Could not find courses!'
       })
-      return;
     }
     return myStartedCourses;
   } catch (error) {
     return({
       error: 'Component did not mount!'
     })
-    return;
   }
 }
 

@@ -28,6 +28,7 @@ class App extends React.Component {
     const {isAuthenticated} = this.state
     return (
       isAuthenticated ?
+        // @ts-ignore
         <Main/> :
         <Login/>
     )
