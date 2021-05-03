@@ -12,7 +12,13 @@ export class MineKurs extends React.Component{
     }
   };
 
-  async handleClick(str:string) {
+  handleClickCard(courseId: any) {
+    // @ts-ignore
+    const {history} = this.props;
+    history.push("/coursedetails/" + courseId);
+  }
+
+  async handleClickTab(str:string) {
     this.setState({
       activeTab: str,
     })
@@ -22,6 +28,8 @@ export class MineKurs extends React.Component{
       this.setState({error:courses.error})
     }
     this.setState({myCourses: courses});
+    // @ts-ignore
+    this.props.setMyCourses(courses);
   };
 
   async componentDidMount() {
@@ -41,15 +49,22 @@ export class MineKurs extends React.Component{
       return <div>ERROR!!!</div>
     }
     // @ts-ignore
-    const {myCourses, activeTab} = this.state;
+    let {myCourses, activeTab} = this.state;
+    // @ts-ignore
+    let {searchValues} = this.props;
+    if (searchValues === null) {
+      return <div>Nothing found!</div>
+    } else if (searchValues.length > 0) {
+      myCourses = searchValues;
+    }
     const courseCard = myCourses
       // @ts-ignore
       .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
         return (
           // @ts-ignore
-          <Card className={'card'} onClick={(event) => this.handleClick(course_id)} key={course_id}>
+          <Card className={'card'} onClick={(event) => this.handleClickCard(course_id)} key={course_id}>
             <img className={'imageStyles'} alt="amazingeness" src={image_url}/>
-            <H5 className={'H5Style'}>
+            <H5 className={'H5Style truncate'}>
               {course_name}
             </H5>
             <div className={'dateContainer'}>
@@ -88,19 +103,19 @@ export class MineKurs extends React.Component{
         <Stack style={{justifyContent: 'center'}}>
           <Tab
             active={activeTab === "enrolledCourses"}
-            onClick={() => this.handleClick("enrolledCourses")}
+            onClick={() => this.handleClickTab("enrolledCourses")}
           >
             Påmeldte kurs
           </Tab>
           <Tab
             active={activeTab === "startedCourses"}
-            onClick={() => this.handleClick("startedCourses")}
+            onClick={() => this.handleClickTab("startedCourses")}
           >
             Påbegynte kurs
           </Tab>
           <Tab
             active={activeTab === "competedCourses"}
-            onClick={() => this.handleClick("competedCourses")}
+            onClick={() => this.handleClickTab("competedCourses")}
           >
             Fullførte kurs
           </Tab>

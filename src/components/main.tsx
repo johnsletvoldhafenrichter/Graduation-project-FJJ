@@ -34,6 +34,8 @@ export default class Main extends React.Component {
       searchField: '',
       courses: [],
       searchValues: [],
+      myCourses: [],
+      searchParam: '',
     }
   }
 
@@ -56,6 +58,7 @@ export default class Main extends React.Component {
       })
       return;
     }
+    console.log(this.props)
   }
 
   changeTray(trayName: string, event: any): void {
@@ -71,7 +74,6 @@ export default class Main extends React.Component {
         trayState: null,
       })
     }
-
   }
 
   closeTray(): void {
@@ -87,23 +89,76 @@ export default class Main extends React.Component {
 
   handleChangeSearch(event: { target: any }) {
     this.setState({searchField: event.target.value})
-    this.checkForResults();
+    // @ts-ignore
+    if (this.state.searchParam === 'courses') {
+      console.log('handleChangeSearch')
+      this.checkForResults('courses')
+      // @ts-ignore
+    } else if (this.state.searchParam === 'myCourses'){
+      console.log('myCourses')
+      this.checkForResults('myCourses')
+    }
   }
 
-  async checkForResults() {
-    //@ts-ignore
-    const currentString = this.state.searchField
-    //@ts-ignore
-    let courses = this.state.courses.slice()
-    //@ts-ignore
-    const searchValues = [];
-    for (let i = 0; i < courses.length; i++) {
-      if (courses[i].course_name.toLowerCase().includes(currentString)) {
-        searchValues.push(courses[i])
+  async checkForResults(str:any) {
+    if (str === 'courses') {
+      //@ts-ignore
+      const currentString = this.state.searchField
+      //@ts-ignore
+      let courses = this.state.courses.slice()
+      //@ts-ignore
+      let searchValues = [];
+      for (let i = 0; i < courses.length; i++) {
+        if (courses[i].course_name.toLowerCase().includes(currentString)) {
+          searchValues.push(courses[i])
+        }
+      }
+      if (searchValues.length < 1) {
+        //@ts-ignore
+        searchValues = null;
+      }
+      // @ts-ignore
+      await this.setState({searchValues})
+    } else if (str === 'myCourses') {
+      //@ts-ignore
+      const currentString = this.state.searchField
+      //@ts-ignore
+      let courses = this.state.myCourses.slice()
+      //@ts-ignore
+      let searchValues = [];
+      for (let i = 0; i < courses.length; i++) {
+        if (courses[i].course_name.toLowerCase().includes(currentString)) {
+          searchValues.push(courses[i])
+        }
+      }
+      if (searchValues.length < 1) {
+        //@ts-ignore
+        searchValues = null;
+      }
+      // @ts-ignore
+      await this.setState({searchValues})    }
+  }
+
+  async setMyCourses(test: any) {
+    await this.setState({myCourses:test})
+  }
+
+  closeSearch(str: string){
+    this.setState({searching: false, searchValues: []})
+    switch (str) {
+      case 'dinSide': {
+        this.setState({searchParam: 'dinSide'})
+        break;
+      }
+      case 'mineKurs': {
+        this.setState({searchParam: 'myCourses'})
+        break;
+      }
+      default: {
+        this.setState({searchParam: 'courses'})
+        break;
       }
     }
-    // @ts-ignore
-    await this.setState({searchValues})
   }
 
   render() {
@@ -143,17 +198,20 @@ export default class Main extends React.Component {
                   <NavbarButton
                     icon="AdminHome"
                     text="Min side"
+                    onClick={()=> this.closeSearch('dinSide')}
                     as={Link}
                     to="/dinside"/>
                   <NavbarButton
                     icon="UserPlans"
                     text="Mine kurs"
+                    onClick={()=> this.closeSearch('mineKurs')}
                     as={Link}
                     to="/mycourses"
                   />
                   <NavbarButton
                     icon="Learn"
                     text="Kursoversikt"
+                    onClick={()=> this.closeSearch('kursoversikt')}
                     as={Link}
                     to="/courses"/>
                   <NavbarButton
@@ -193,13 +251,14 @@ export default class Main extends React.Component {
               <Route
                 path='/coursedetails/:id'
                 render={(props) => (
-                  <Kurs {...props}/>
+                  <Kurs {...props} />
                 )}>
               </Route>
               <Route
                 path='/mycourses'
                 render={(props) => (
-                  <MineKurs {...props}/>
+                  // @ts-ignore
+                  <MineKurs {...props} setMyCourses={this.setMyCourses.bind(this)} searchValues={searchValues}/>
                 )}>
               </Route>
             </Switch>
