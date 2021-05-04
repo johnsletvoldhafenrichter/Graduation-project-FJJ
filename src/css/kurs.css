@@ -1,0 +1,15 @@
+.coursesContainer {
+    display: grid;
+    grid-template-rows: 20%,  ;
+    align-items: center;
+    justify-content: center;
+}
+
+.infoContainer {
+    flex: 1;
+    width: 50vw;
+}
+
+.img {
+    width: 100%;
+}

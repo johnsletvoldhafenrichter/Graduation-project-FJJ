@@ -1,6 +1,7 @@
 import {getCourseById} from "../functions/kursFunctions";
 import React from "react";
 import {SimpleTable} from "@dossier/mithra-ui";
+import '../css/kurs.css'
 
 export class Kurs extends React.Component {
     constructor(props: {} | Readonly<{}>) {
@@ -59,69 +60,79 @@ export class Kurs extends React.Component {
             return <div>{error}!</div>
         }
         return (
-            <>
-                <img src={image_url} alt={image_description}/>
-                <SimpleTable>
-                    <tbody>
-                    <tr>
-                        <th>
-                            Navn:
-                        </th>
-                        <td>
-                            {course_name}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Organization:
-                        </th>
-                        <td>
-                            {org}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Description:
-                        </th>
-                        <td>
-                            {course_description}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Course Start Date:
-                        </th>
-                        <td>
-                            {start_date}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Course End Date:
-                        </th>
-                        <td>
-                            {end_date}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Enrollment Start Date:
-                        </th>
-                        <td>
-                            {enrollment_start}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            Enrollment End Date:
-                        </th>
-                        <td>
-                            {enrollment_end}
-                        </td>
-                    </tr>
-                    </tbody>
-                </SimpleTable>
-            </>
+            <div className={'coursesContainer'}>
+                {/*Course Image*/}
+                <div className={'infoContainer'}>
+                    <img className={'img'} src={image_url} alt={image_description}/>
+                </div>
+                {/*Course Image end */}
+
+                {/*Course Description Table*/}
+                <div className={'infoContainer'}>
+                    <SimpleTable>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Navn:
+                                </th>
+                                <td>
+                                    {course_name}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Organization:
+                                </th>
+                                <td>
+                                    {org}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Course Start Date:
+                                </th>
+                                <td>
+                                    {start_date}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Course End Date:
+                                </th>
+                                <td>
+                                    {end_date}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Enrollment Start Date:
+                                </th>
+                                <td>
+                                    {enrollment_start}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Enrollment End Date:
+                                </th>
+                                <td>
+                                    {enrollment_end}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Description:
+                                </th>
+                                <td>
+                                    {course_description}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </SimpleTable>
+                </div>
+                {/*Course Description Table End*/}
+
+            </div>
         )
     }
 }
