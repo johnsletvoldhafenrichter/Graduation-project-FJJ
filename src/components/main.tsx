@@ -36,6 +36,7 @@ export default class Main extends React.Component {
       searchValues: [],
       myCourses: [],
       searchParam: '',
+      mainCourses: []
     }
   }
 
@@ -97,6 +98,10 @@ export default class Main extends React.Component {
     } else if (this.state.searchParam === 'myCourses'){
       console.log('myCourses')
       this.checkForResults('myCourses')
+      // @ts-ignore
+    } else if (this.state.searchParam === 'mainCourses'){
+      console.log('mainCourses')
+      this.checkForResults('mainCourses')
     }
   }
 
@@ -124,6 +129,24 @@ export default class Main extends React.Component {
       const currentString = this.state.searchField
       //@ts-ignore
       let courses = this.state.myCourses.slice()
+      //@ts-ignore
+      let searchValues = [];
+      for (let i = 0; i < courses.length; i++) {
+        if (courses[i].course_name.toLowerCase().includes(currentString)) {
+          searchValues.push(courses[i])
+        }
+      }
+      if (searchValues.length < 1) {
+        //@ts-ignore
+        searchValues = null;
+      }
+      // @ts-ignore
+      await this.setState({searchValues})
+    } else if (str === 'mainCourses') {
+      //@ts-ignore
+      const currentString = this.state.searchField
+      //@ts-ignore
+      let courses = this.state.mainCourses.slice()
       //@ts-ignore
       let searchValues = [];
       for (let i = 0; i < courses.length; i++) {
@@ -233,7 +256,8 @@ export default class Main extends React.Component {
             <Switch>
               <Route path="/dinside"
                      render={(props) => (
-                       <DinSide {...props}/>
+                       // @ts-ignore
+                       <DinSide {...props} searchValues={searchValues} />
                      )}>
               </Route>
               <Route path='/profile'
