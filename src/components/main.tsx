@@ -36,7 +36,8 @@ export default class Main extends React.Component {
       searchValues: [],
       myCourses: [],
       searchParam: '',
-      mainCourses: []
+      mainCourses: [],
+      filteredCourses: []
     }
   }
 
@@ -66,7 +67,7 @@ export default class Main extends React.Component {
     if (!this.state.trayState) {
       this.setState({
         //@ts-ignore
-        trayState: <Filter closeFunction={this.closeTray.bind(this)}/>
+        trayState: <Filter closeFunction={this.closeTray.bind(this)}  setFilteredCourses={this.setFilteredCourses.bind(this)}/>
       })
       return;
     } else {
@@ -79,6 +80,7 @@ export default class Main extends React.Component {
   closeTray(): void {
     this.setState({
       trayState: null,
+      filteredCourses: [],
     })
   }
 
@@ -90,10 +92,10 @@ export default class Main extends React.Component {
   handleChangeSearch(event: { target: any }) {
     this.setState({searchField: event.target.value})
     // @ts-ignore
-    this.checkForResults(this.state.searchParam)
+    this.checkForResultsSearch(this.state.searchParam)
   }
 
-  async checkForResults(str:any) {
+  async checkForResultsSearch(str:any) {
     if (str === 'courses') {
       //@ts-ignore
       const currentString = this.state.searchField
@@ -151,8 +153,12 @@ export default class Main extends React.Component {
     }
   }
 
-  setMyCourses(test: any) {
-    this.setState({myCourses:test})
+  setFilteredCourses(courses:any) {
+    this.setState({ filteredCourses: courses})
+  }
+
+  setMyCourses(courses: any) {
+    this.setState({myCourses:courses})
   }
 
   closeSearch(str: string){
@@ -258,7 +264,7 @@ export default class Main extends React.Component {
                 path='/courses'
                 render={(props) => (
                   // @ts-ignore
-                  <Kursoversikt {...props} courses={courses} searchValues={searchValues}/>
+                  <Kursoversikt {...props} courses={courses} searchValues={searchValues} filteredCourses={this.state.filteredCourses}/>
                 )}>
               </Route>
               <Route

@@ -1,5 +1,6 @@
 import {Text, Tray, TrayHeader, Stack, Tab, Input, FormLabel} from "@dossier/mithra-ui";
 import React from "react";
+import {getCoursesByFilter} from "../functions/filterFunctions";
 
 export class Filter extends React.Component<any, any> {
     constructor(props: any) {
@@ -7,26 +8,37 @@ export class Filter extends React.Component<any, any> {
 
         this.state = {
             activeTab: null,
+            error: '',
         }
     }
-    handleClick(str:string) {
+
+    async handleClick(str: string) {
+        const path = window.location.pathname;
+        if (str !== this.state.activeTab) {
+            if (path === "/courses") {
+                try {
+                    let filteredCourses = await getCoursesByFilter(str)
+                    this.props.setFilteredCourses(filteredCourses)
+                } catch (err) {
+                    this.setState({error: 'Couldnt get courses'})
+                }
+            } else if (path === "/mycourses") {
+                console.log('path === myCourses')
+            } else if (path === "/dinside") {
+                console.log('path === dinSide')
+            }
+        }
         this.setState({
             activeTab: str,
         })
     }
 
     componentDidMount() {
-        const path = window.location.pathname;
-        if (path === "/courses") {
-            console.log("hei!")
-        }
     }
 
     render() {
         const close = this.props.closeFunction
-
         const {activeTab} = this.state
-
         const inputDiv = {
             paddingTop: '1rem',
         }
@@ -40,25 +52,25 @@ export class Filter extends React.Component<any, any> {
                 <Stack>
                     <Tab
                         active={activeTab === "Kategori"}
-                        onClick={()=>this.handleClick('Kategori')}
+                        onClick={() => this.handleClick('Kategori')}
                     >
                         Kategori
                     </Tab>
                     <Tab
                         active={activeTab === "Lokasjon"}
-                        onClick={()=>this.handleClick('Lokasjon')}
+                        onClick={() => this.handleClick('Lokasjon')}
                     >
                         Lokasjon
                     </Tab>
                     <Tab
                         active={activeTab === "Posisjon"}
-                        onClick={()=>this.handleClick('Posisjon')}
+                        onClick={() => this.handleClick('Posisjon')}
                     >
                         Posisjon
                     </Tab>
                     <Tab
                         active={activeTab === "Spesialisering"}
-                        onClick={()=>this.handleClick('Spesialisering')}
+                        onClick={() => this.handleClick('Spesialisering')}
                     >
                         Spesialisering
                     </Tab>
@@ -74,7 +86,7 @@ export class Filter extends React.Component<any, any> {
                         id="search-field"
                         placeholder="Søk her..."
                     />
-                    </div>
+                </div>
                 <Text>Tagger:</Text>
                 <Text>Søkeresultater:</Text>
             </Tray>
