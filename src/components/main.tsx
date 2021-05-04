@@ -59,7 +59,6 @@ export default class Main extends React.Component {
       })
       return;
     }
-    console.log(this.props)
   }
 
   changeTray(trayName: string, event: any): void {
@@ -165,6 +164,9 @@ export default class Main extends React.Component {
   async setMyCourses(test: any) {
     await this.setState({myCourses:test})
   }
+  async setMainCourses(courses: any) {
+    await this.setState({mainCourses:courses})
+  }
 
   closeSearch(str: string){
     this.setState({searching: false, searchValues: []})
@@ -186,10 +188,9 @@ export default class Main extends React.Component {
 
   render() {
     //@ts-ignore
-    const {courses, searching, searchValues} = this.state;
+    const {courses, searching, searchValues, mainCourses} = this.state;
     //@ts-ignore
     const tray = this.state.trayState;
-
     return (
       <Router>
         <ApplicationLayout
@@ -257,7 +258,7 @@ export default class Main extends React.Component {
               <Route path="/dinside"
                      render={(props) => (
                        // @ts-ignore
-                       <DinSide {...props} searchValues={searchValues} />
+                       <DinSide {...props} mainCourses={mainCourses} setMainCourses={this.setMainCourses.bind(this)} searchValues={searchValues} />
                      )}>
               </Route>
               <Route path='/profile'
