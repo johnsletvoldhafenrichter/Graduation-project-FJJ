@@ -4,7 +4,7 @@ import {SimpleTable} from "@dossier/mithra-ui";
 import '../css/kurs.css'
 
 export class Kurs extends React.Component {
-    constructor(props: {} | Readonly<{}>) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             course: {},
@@ -33,7 +33,6 @@ export class Kurs extends React.Component {
         }
     }
 
-
     render() {
         //@ts-ignore
         const courseDetail = this.state.course;
@@ -60,17 +59,25 @@ export class Kurs extends React.Component {
             return <div>{error}!</div>
         }
         return (
-            <div className={'coursesContainer'}>
-                {/*Course Image*/}
-                <div className={'infoContainer'}>
-                    <img className={'img'} src={image_url} alt={image_description}/>
-                </div>
-                {/*Course Image end */}
+            <div className={'individualCoursesContainer'}>
+                {/* Header */}
+                <h3 className={'header'}>
+                    {course_name}
+                </h3>
+                {/* END Header */}
 
-                {/*Course Description Table*/}
-                <div className={'infoContainer'}>
-                    <SimpleTable>
-                        <tbody>
+                {/* Image and table container */}
+                <div className={'imageAndTableContainer'}>
+                    {/*Course Image*/}
+                    <div className={'infoContainer'}>
+                        <img className={'img'} src={image_url} alt={image_description}/>
+                    </div>
+                    {/* END Course Image */}
+
+                    {/* Course Description Table */}
+                    <div className={'infoContainer'}>
+                        <SimpleTable>
+                            <tbody>
                             <tr>
                                 <th>
                                     Navn:
@@ -119,19 +126,23 @@ export class Kurs extends React.Component {
                                     {enrollment_end}
                                 </td>
                             </tr>
-                            <tr>
-                                <th>
-                                    Description:
-                                </th>
-                                <td>
-                                    {course_description}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </SimpleTable>
+                            </tbody>
+                        </SimpleTable>
+                    </div>
                 </div>
-                {/*Course Description Table End*/}
+                {/*END Image and table container*/}
 
+
+
+
+                <tr>
+                    <th>
+                        Description:
+                    </th>
+                    <td>
+                        {course_description}
+                    </td>
+                </tr>
             </div>
         )
     }
