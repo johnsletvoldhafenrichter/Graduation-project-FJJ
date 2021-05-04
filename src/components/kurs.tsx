@@ -61,9 +61,9 @@ export class Kurs extends React.Component {
         return (
             <div className={'individualCoursesContainer'}>
                 {/* Header */}
-                <h3 className={'header'}>
+                <h1 className={'header'}>
                     {course_name}
-                </h3>
+                </h1>
                 {/* END Header */}
 
                 {/* Image and table container */}
@@ -75,74 +75,41 @@ export class Kurs extends React.Component {
                     {/* END Course Image */}
 
                     {/* Course Description Table */}
-                    <div className={'infoContainer'}>
-                        <SimpleTable>
-                            <tbody>
-                            <tr>
-                                <th>
-                                    Navn:
-                                </th>
-                                <td>
-                                    {course_name}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
+                    <div className={'infoContainer'} id={'tableContainer'}>
+
+                            <h4 className={'dateTit'} id={'startDateTit'}>Course Start:</h4>
+                            <p className={'dateDisp'}>{start_date}</p>
+
+                            <h4 className={'dateTit'}>Course End:</h4>
+                            <p className={'dateDisp'}>{end_date}</p>
+
+                            <h4 className={'dateTit'}>Enrollment Start:</h4>
+                            <p className={'dateDisp'}>{enrollment_start}</p>
+
+                            <h4 className={'dateTit'}>Enrollment End:</h4>
+                            <p className={'dateDisp'}>{enrollment_end}</p>
+                            <div>
+                                <h4 className={'dateTit'}>
                                     Organization:
-                                </th>
-                                <td>
-                                    {org}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Course Start Date:
-                                </th>
-                                <td>
-                                    {start_date}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Course End Date:
-                                </th>
-                                <td>
-                                    {end_date}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Enrollment Start Date:
-                                </th>
-                                <td>
-                                    {enrollment_start}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Enrollment End Date:
-                                </th>
-                                <td>
-                                    {enrollment_end}
-                                </td>
-                            </tr>
-                            </tbody>
-                        </SimpleTable>
+                                </h4>
+                                {org}
+                            </div>
                     </div>
+                    {/* END Course Description Table */}
                 </div>
                 {/*END Image and table container*/}
 
 
-
-
-                <tr>
-                    <th>
+                <div>
+                    <h4 className={'descTit'}>
                         Description:
-                    </th>
-                    <td>
+                    </h4>
+                    <p className={'descPar'}>
                         {course_description}
-                    </td>
-                </tr>
+                    </p>
+                </div>
+
+
             </div>
         )
     }
