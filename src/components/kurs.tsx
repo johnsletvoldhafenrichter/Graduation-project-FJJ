@@ -4,7 +4,7 @@ import {SimpleTable} from "@dossier/mithra-ui";
 import '../css/kurs.css'
 
 export class Kurs extends React.Component {
-    constructor(props: {} | Readonly<{}>) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             course: {},

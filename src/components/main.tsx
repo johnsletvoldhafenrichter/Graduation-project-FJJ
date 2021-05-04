@@ -25,7 +25,7 @@ import {MineKurs} from './mineKurs';
 import {getAllCourses} from "../functions/kursoversiktFunction";
 
 export default class Main extends React.Component {
-  constructor(props: any) {
+  constructor(props: {}) {
     super(props);
 
     this.state = {
@@ -45,7 +45,7 @@ export default class Main extends React.Component {
     //@ts-ignore
     try {
       // @ts-ignore
-      const courses = await getAllCourses();
+          const courses = await getAllCourses();
       if (!courses) {
         this.setState({
           error: 'Could not find courses!'
