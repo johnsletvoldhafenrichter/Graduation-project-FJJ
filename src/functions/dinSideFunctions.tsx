@@ -34,7 +34,7 @@ async function switchCourseView(userId: any, activeTab: string) {
 };
 
 async function getObligCoursesByUserId(userId: Number) {
-  const result: any = await axios(serverUrl + '/courses', {
+  const result: any = await axios(serverUrl + '/obligatory', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ async function getObligCoursesByUserId(userId: Number) {
 }
 
 async function getLocalCoursesByUserId(userId: Number) {
-  const result: any = await axios(serverUrl + '/courses', {
+  const result: any = await axios(serverUrl + '/local', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ async function getLocalCoursesByUserId(userId: Number) {
 }
 
 async function getRecommendedCoursesByUserId(userId: Number) {
-  const result: any = await axios(serverUrl + '/courses', {
+  const result: any = await axios(serverUrl + '/recommended', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

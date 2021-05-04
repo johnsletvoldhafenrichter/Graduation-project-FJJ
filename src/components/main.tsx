@@ -161,6 +161,9 @@ export default class Main extends React.Component {
   setMyCourses(courses: any) {
     this.setState({myCourses:courses})
   }
+  async setMainCourses(courses: any) {
+    await this.setState({mainCourses:courses})
+  }
 
   closeSearch(str: string){
     this.setState({searching: false, searchValues: []})
@@ -182,10 +185,9 @@ export default class Main extends React.Component {
 
   render() {
     //@ts-ignore
-    const {courses, searching, searchValues} = this.state;
+    const {courses, searching, searchValues, mainCourses} = this.state;
     //@ts-ignore
     const tray = this.state.trayState;
-
     return (
       <Router>
         <ApplicationLayout
@@ -253,7 +255,7 @@ export default class Main extends React.Component {
               <Route path="/dinside"
                      render={(props) => (
                        // @ts-ignore
-                       <DinSide {...props} searchValues={searchValues} />
+                       <DinSide {...props} mainCourses={mainCourses} setMainCourses={this.setMainCourses.bind(this)} searchValues={searchValues} />
                      )}>
               </Route>
               <Route path='/profile'
