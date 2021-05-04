@@ -48,9 +48,9 @@ export class MineKurs extends React.Component{
     if(error) {
       return <div>ERROR!!!</div>
     }
-    // @ts-ignore
+    //@ts-ignore
     let {myCourses, activeTab} = this.state;
-    // @ts-ignore
+    //@ts-ignore
     let {searchValues} = this.props;
     if (searchValues === null) {
       return <div>Nothing found!</div>

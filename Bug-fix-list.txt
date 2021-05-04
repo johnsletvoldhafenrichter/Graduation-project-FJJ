@@ -1,0 +1,5 @@
+LES DETTE:
+Skriv en beskrivelse av funet bug her. Vær så detaljert som mulig slik at det er enkelt å gjenskape problemet. Husk
+henvisning til hvilken side problemet ble funnet på og evt. hvilken fil dette relaterer til.
+
+Observerte bugs:

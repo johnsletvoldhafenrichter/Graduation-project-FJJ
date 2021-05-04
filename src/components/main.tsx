@@ -131,6 +131,7 @@ export default class Main extends React.Component {
         searchValues = null;
       }
       // @ts-ignore
+
       await this.setState({searchValues})
     } else if (str === 'mainCourses') {
       //@ts-ignore
