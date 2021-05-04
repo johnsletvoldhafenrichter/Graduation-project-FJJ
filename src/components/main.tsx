@@ -59,7 +59,6 @@ export default class Main extends React.Component {
       })
       return;
     }
-    console.log(this.props)
   }
 
   changeTray(trayName: string, event: any): void {
@@ -91,18 +90,7 @@ export default class Main extends React.Component {
   handleChangeSearch(event: { target: any }) {
     this.setState({searchField: event.target.value})
     // @ts-ignore
-    if (this.state.searchParam === 'courses') {
-      console.log('handleChangeSearch')
-      this.checkForResults('courses')
-      // @ts-ignore
-    } else if (this.state.searchParam === 'myCourses'){
-      console.log('myCourses')
-      this.checkForResults('myCourses')
-      // @ts-ignore
-    } else if (this.state.searchParam === 'mainCourses'){
-      console.log('mainCourses')
-      this.checkForResults('mainCourses')
-    }
+    this.checkForResults(this.state.searchParam)
   }
 
   async checkForResults(str:any) {
@@ -159,18 +147,19 @@ export default class Main extends React.Component {
         searchValues = null;
       }
       // @ts-ignore
-      await this.setState({searchValues})    }
+      await this.setState({searchValues})
+    }
   }
 
-  async setMyCourses(test: any) {
-    await this.setState({myCourses:test})
+  setMyCourses(test: any) {
+    this.setState({myCourses:test})
   }
 
   closeSearch(str: string){
     this.setState({searching: false, searchValues: []})
     switch (str) {
       case 'dinSide': {
-        this.setState({searchParam: 'dinSide'})
+        this.setState({searchParam: 'mainCourses'})
         break;
       }
       case 'mineKurs': {
