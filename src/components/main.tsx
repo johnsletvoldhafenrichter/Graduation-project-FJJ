@@ -136,11 +136,11 @@ export default class Main extends React.Component {
         searchValues = null;
       }
       // @ts-ignore
-      await this.setState({searchValues})    }
+       this.setState({searchValues})    }
   }
 
-  async setMyCourses(test: any) {
-    await this.setState({myCourses:test})
+   setMyCourses(test: any) {
+     this.setState({myCourses:test})
   }
 
   closeSearch(str: string){
