@@ -67,19 +67,12 @@ export class Profile extends React.Component {
     return (
       <div>
         <SimpleTable>
-          {/*{profilePicture ?*/}
             <Avatar
               imageUrl={profilePicture}
               initials={initials}
               size="128px"
-              title="Arnold Westover"
+              title="Profile picture"
             />
-          {/*:*/}
-          {/*  <div>*/}
-          {/*    /!*{user.first_name.slice(0,1)}*!/*/}
-          {/*    no picture*/}
-          {/*  </div>*/}
-          {/*}*/}
           <tbody>
           <tr>
             <th>
