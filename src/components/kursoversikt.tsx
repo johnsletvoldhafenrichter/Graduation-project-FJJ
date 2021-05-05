@@ -27,7 +27,7 @@ export class Kursoversikt extends React.Component {
         } else if (searchValues.length > 0) {
             courses = searchValues;
         }
-        if (filteredCourses.length > 0) {
+        if (filteredCourses && filteredCourses.length > 0) {
             return <div>{filteredCourses}I filter!</div>
         }
         if (error) {

@@ -1,6 +1,6 @@
 import {Text, Tray, TrayHeader, Stack, Tab, Input, FormLabel} from "@dossier/mithra-ui";
 import React from "react";
-import {getCoursesByFilter} from "../functions/filterFunctions";
+import {getFilteredCourses} from "../functions/filterFunctions";
 
 export class Filter extends React.Component<any, any> {
     constructor(props: any) {
@@ -12,24 +12,18 @@ export class Filter extends React.Component<any, any> {
         }
     }
 
-    async handleClick(str: string) {
+    async handleClick(fromWhere: string) {
         const path = window.location.pathname;
-        if (str !== this.state.activeTab) {
-            if (path === "/courses") {
-                try {
-                    let filteredCourses = await getCoursesByFilter(str)
-                    this.props.setFilteredCourses(filteredCourses)
-                } catch (err) {
-                    this.setState({error: 'Couldnt get courses'})
-                }
-            } else if (path === "/mycourses") {
-                console.log('path === myCourses')
-            } else if (path === "/dinside") {
-                console.log('path === dinSide')
+        if (fromWhere !== this.state.activeTab) {
+            try {
+                let filteredCourses = await getFilteredCourses(fromWhere, path)
+                this.props.setFilteredCourses(filteredCourses)
+            } catch (err) {
+                this.setState({error: 'Couldnt get courses'})
             }
         }
         this.setState({
-            activeTab: str,
+            activeTab: fromWhere,
         })
     }
 
@@ -52,25 +46,25 @@ export class Filter extends React.Component<any, any> {
                 <Stack>
                     <Tab
                         active={activeTab === "Kategori"}
-                        onClick={() => this.handleClick('Kategori')}
+                        onClick={() => this.handleClick('category')}
                     >
                         Kategori
                     </Tab>
                     <Tab
                         active={activeTab === "Lokasjon"}
-                        onClick={() => this.handleClick('Lokasjon')}
+                        onClick={() => this.handleClick('location')}
                     >
                         Lokasjon
                     </Tab>
                     <Tab
                         active={activeTab === "Posisjon"}
-                        onClick={() => this.handleClick('Posisjon')}
+                        onClick={() => this.handleClick('position')}
                     >
                         Posisjon
                     </Tab>
                     <Tab
                         active={activeTab === "Spesialisering"}
-                        onClick={() => this.handleClick('Spesialisering')}
+                        onClick={() => this.handleClick('specialization')}
                     >
                         Spesialisering
                     </Tab>
