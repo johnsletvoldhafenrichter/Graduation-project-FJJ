@@ -1,6 +1,6 @@
 import React from 'react';
 import jwt_decode from "jwt-decode";
-import {SimpleTable} from "@dossier/mithra-ui";
+import {SimpleTable, Avatar, Stack} from "@dossier/mithra-ui";
 
 const axios = require('axios');
 const serverUrl = process.env.REACT_APP_SERVER_URL
@@ -59,9 +59,29 @@ export class Profile extends React.Component {
     if (loginError) {
       return <div>{loginError}!</div>
     }
+    const profilePicture = user.profile_picture;
+    console.log(user)
+    let initials;
+    if(user.frist_name) {
+      initials  = user.first_name.slice(0, 1).concat(user.last_name.slice(0,1))
+    }
+
     return (
-      <>
+      <div>
         <SimpleTable>
+          {/*{profilePicture ?*/}
+            <Avatar
+              imageUrl={profilePicture}
+              initials={initials}
+              size="128px"
+              title="Arnold Westover"
+            />
+          {/*:*/}
+          {/*  <div>*/}
+          {/*    /!*{user.first_name.slice(0,1)}*!/*/}
+          {/*    no picture*/}
+          {/*  </div>*/}
+          {/*}*/}
           <tbody>
           <tr>
             <th>
@@ -73,7 +93,7 @@ export class Profile extends React.Component {
           </tr>
           <tr>
             <th>
-              Epost:
+              E-post:
             </th>
             <td>
               {user.email}
@@ -81,7 +101,7 @@ export class Profile extends React.Component {
           </tr>
           <tr>
             <th>
-              Telefon:
+              Telefonnummer:
             </th>
             <td>
               {user.phone_number}
@@ -89,7 +109,7 @@ export class Profile extends React.Component {
           </tr>
           <tr>
             <th>
-              Specialization:
+              Spesialisering:
             </th>
             <td>
               {user.specialization_name}
@@ -97,7 +117,7 @@ export class Profile extends React.Component {
           </tr>
           <tr>
             <th>
-              Position:
+              Stilling:
             </th>
             <td>
               {user.position_name}
@@ -105,7 +125,7 @@ export class Profile extends React.Component {
           </tr>
           <tr>
             <th>
-              Location:
+              Arbeidssted:
             </th>
             <td>
               {user.location_name}
@@ -113,7 +133,7 @@ export class Profile extends React.Component {
           </tr>
           </tbody>
         </SimpleTable>
-      </>
+      </div>
     )
   }
 }
