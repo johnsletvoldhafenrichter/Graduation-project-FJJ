@@ -53,12 +53,15 @@ export class MineKurs extends React.Component{
     //@ts-ignore
     let {myCourses, activeTab} = this.state;
     //@ts-ignore
-    let {searchValues} = this.props;
+    let {searchValues, filtering} = this.props;
     if (searchValues === null) {
       return <div>Nothing found!</div>
     } else if (searchValues.length > 0) {
       myCourses = searchValues;
     }
+
+    console.log(filtering)
+
     const courseCard = myCourses
       // @ts-ignore
       .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
@@ -102,6 +105,8 @@ export class MineKurs extends React.Component{
       <div>
 
         {/*Tab buttons*/}
+
+        {filtering ? <div>Filtering!</div> :
         <Stack style={{justifyContent: 'center'}}>
           <Tab
             active={activeTab === "enrolledCourses"}
@@ -122,7 +127,7 @@ export class MineKurs extends React.Component{
             Fullførte
           </Tab>
         </Stack>
-
+        }
         {/*Card view*/}
         <div className={'coursesContainer'}>
           {courseCard}

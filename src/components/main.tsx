@@ -5,7 +5,6 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import "@dossier/mithra-ui/dist/ds.css"
 import {
   ApplicationLayout,
   PageHeaderButton,
@@ -66,9 +65,8 @@ export default class Main extends React.Component {
     //@ts-ignore
     if (!this.state.trayState) {
       this.setState({
-        filtering: true,
         // @ts-ignore
-        trayState: <Filter filtering={true} closeFunction={this.closeTray.bind(this)} setFilteringState={this.setFilteringState.bind(this)} setMyCourses={this.setMyCourses.bind(this)} setCourses={this.setCourses.bind(this)}/>
+        trayState: <Filter filtering={true} closeFunction={this.closeTray.bind(this)} setFilteringState={this.setFilteringState.bind(this)} setMyCourses={this.setMyCourses.bind(this)} setCourses={this.setCourses.bind(this)} setMainCourses={this.setMainCourses.bind(this)}/>
       })
       return;
     } else {
@@ -169,11 +167,11 @@ export default class Main extends React.Component {
     this.setState({searching: false, searchValues: []})
     switch (str) {
       case 'dinSide': {
-        this.setState({searchParam: 'mainCourses'})
+        this.setState({searchParam: 'mainCourses', filtering: false})
         break;
       }
       case 'mineKurs': {
-        this.setState({searchParam: 'myCourses'})
+        this.setState({searchParam: 'myCourses', filtering: false})
         break;
       }
       default: {
@@ -274,12 +272,12 @@ export default class Main extends React.Component {
           pageType="user"
           tray={tray}
           isMainPage>
-          <div className="App ds-typography-body" style={{padding: '0px'}}>
+          <div className="App ds-typography-body">
             <Switch>
               <Route path="/dinside"
                      render={(props) => (
                        // @ts-ignore
-                       <DinSide {...props} mainCourses={mainCourses} setMainCourses={this.setMainCourses.bind(this)} searchValues={searchValues} />
+                       <DinSide {...props} mainCourses={mainCourses} setMainCourses={this.setMainCourses.bind(this)} searchValues={searchValues}  filtering={this.state.filtering}/>
                      )}>
               </Route>
               <Route path='/profile'
@@ -291,7 +289,7 @@ export default class Main extends React.Component {
                 path='/courses'
                 render={(props) => (
                   // @ts-ignore
-                  <Kursoversikt {...props} courses={courses} searchValues={searchValues} filteredCourses={this.state.filteredCourses}/>
+                  <Kursoversikt {...props} courses={courses} searchValues={searchValues} filtering={this.state.filtering}/>
                 )}>
               </Route>
               <Route
@@ -304,7 +302,7 @@ export default class Main extends React.Component {
                 path='/mycourses'
                 render={(props) => (
                   // @ts-ignore
-                  <MineKurs {...props} setMyCourses={this.setMyCourses.bind(this)} searchValues={searchValues}/>
+                  <MineKurs {...props} setMyCourses={this.setMyCourses.bind(this)} searchValues={searchValues} filtering={this.state.filtering}/>
                 )}>
               </Route>
             </Switch>

@@ -1,6 +1,7 @@
-import {Text, Tray, TrayHeader, Stack, Tab, Input, FormLabel, Button} from "@dossier/mithra-ui";
+import {Text, Tray, TrayHeader, Stack, Tab, Input, FormLabel, Button, Tag} from "@dossier/mithra-ui";
 import React from "react";
 import {getFilteredCourses, getQueryResult} from "../functions/filterFunctions";
+import "../css/filter.css"
 
 export class Filter extends React.Component<any, any> {
     constructor(props: any) {
@@ -17,15 +18,12 @@ export class Filter extends React.Component<any, any> {
 
     async handleClick(fromWhere: string) {
         const path = window.location.pathname;
-        // if (fromWhere !== this.state.activeTab) {
         try {
             let filtrationTags = await getFilteredCourses(fromWhere, path)
             this.setState({filtrationTags})
-            // this.props.setFilteredCourses(filteredCourses)
         } catch (err) {
             this.setState({error: 'Couldnt get courses'})
         }
-        // }
         this.setState({
             activeTab: fromWhere,
         })
@@ -60,13 +58,13 @@ export class Filter extends React.Component<any, any> {
     async searchQueryByFilter() {
         const path = window.location.pathname;
         const {selectedTags, activeTab} = this.state
+        this.props.setFilteringState(true)
         let queryResult = await getQueryResult(activeTab, selectedTags, path)
         if (path === '/courses') {
             this.props.setCourses(queryResult);
         } else {
             this.props.setMyCourses(queryResult);
         }
-        this.props.closeFunction();
     }
 
     resetFilter() {
@@ -78,12 +76,12 @@ export class Filter extends React.Component<any, any> {
         const close = this.props.closeFunction
         const {activeTab, selectedTags, filtrationTags, inputField} = this.state
         const filtrationTagsCard = filtrationTags.map((tag: any) => {
-            return (<div onClick={(event) => this.handleAddTag(event)} id={tag[1]}>{tag[0]}</div>)
+            return (<div style={{margin: '0 1em 1em 0',}}><Tag intent="neutral" text={tag[0]} onClick={(event) => this.handleAddTag(event)} id={tag[1]}/></div>)
         })
         const selectedTagsCards = filtrationTags.map((tag:any)=> {
             for (let i = 0; i < selectedTags.length; i++) {
                 if (tag[1] === parseInt(selectedTags[i])) {
-                    return (<div onClick={(event) => this.handleRemoveTag(event)} id={tag[1]}>{tag[0]}</div>)
+                    return (<div style={{margin: '0 1em 1em 0',}}><Tag intent="neutral" text={tag[0]} onClick={(event) => this.handleRemoveTag(event)} id={tag[1]}/></div>)
                 }
             }
             return
@@ -139,9 +137,9 @@ export class Filter extends React.Component<any, any> {
                         value={inputField}
                     />
                 </div>
-                <Text>Tagger: <div>{selectedTagsCards}</div></Text>
+                <Text>Tagger: <div className="tagParent">{selectedTagsCards}</div></Text>
                 <Text>Søkeresultater:</Text>
-                <Text>{filtrationTagsCard}</Text>
+                <div className="tagParent">{filtrationTagsCard}</div>
                 <Button text="Søk Her!" onClick={()=>this.searchQueryByFilter()}></Button>
                 <Button text="Reset Filter" onClick={()=>this.resetFilter()}></Button>
             </Tray>
