@@ -1,0 +1,45 @@
+.loginContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.loginTitle {
+    padding-top: 15%;
+    text-align: center;
+}
+
+.formDivContainer {
+    flex: 1;
+    display: flex;
+    margin: auto;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: auto;
+}
+.loginFormElement {
+    margin: 4px;
+    width: 250px;
+}
+
+.loginButton {
+    margin-top: 15px;
+}
+
+.loginErrorMessage {
+    text-align: center;
+    margin: 15px;
+    color: #243d51;
+}
+
+.dossierLogo {
+    max-height: 80px;
+    padding-bottom: 15%;
+}

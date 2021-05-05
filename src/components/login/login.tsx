@@ -1,6 +1,7 @@
 import React from 'react';
 import {requestSessionToken} from './loginFunctions'
-import {Button, Input} from "@dossier/mithra-ui";
+import {Button, Input, DossierLogo, H1, FormLabel} from "@dossier/mithra-ui";
+import '../../css/login.css';
 
 export class Login extends React.Component {
     constructor(props: any) {
@@ -58,47 +59,51 @@ export class Login extends React.Component {
     render() {
         // @ts-ignore
         const {loginError} = this.state
-        const containerStyle = {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100vh',
-            width: '100vw'
-        }
-        const formStyle = {
-            flex: 1,
-            margin: 'auto'
-        }
-        const elementStyle = {
-            textAlign: 'center',
-            margin: 'auto'
-        }
-
         return (
-            <div style={containerStyle}>
-                <div style={formStyle}>
-                    {/* @ts-ignore*/}
-                    <form style={elementStyle} onSubmit={this.handleSubmit.bind(this)}>
+            <div className={'loginContainer'}>
+                <H1 className={'loginTitle'}>
+                    Velkommen til brukerportalen
+                </H1>
+
+                {/* Inputs and login button */}
+                <div className={'formDivContainer'}>
+                    <form className={'loginForm'} onSubmit={this.handleSubmit.bind(this)}>
+
                         <Input
+                            className={'loginFormElement'}
                             id="userName"
-                            placeholder="Enter username..."
+                            placeholder="Brukernavn"
                             onChange={(event) => {
                                 this.handleChange('userName', event)
                             }}
                         />
                         <Input
+                            className={'loginFormElement'}
                             id="password"
-                            placeholder="Enter password..."
+                            placeholder="Passord"
+                            type='password'
                             onChange={(event) => {
                                 this.handleChange('password', event)
                             }}
                         />
-                        <Button variant="primary" type="submit">
+                        <Button
+                          className={'loginFormElement loginButton'}
+                          variant="primary" type="submit">
                             Logg inn
                         </Button>
+
+                        {loginError && <h5 className={'loginErrorMessage'}>
+                            Feil brukernavn eller passord
+                        </h5>}
                     </form>
                 </div>
-                {loginError && <h1>{loginError}!</h1>}
+                {/* END Inputs and login button */}
+
+
+                <DossierLogo className={'dossierLogo'}
+                             variant="color"
+                />
+
             </div>
         );
     }
