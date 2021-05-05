@@ -5,3 +5,5 @@ henvisning til hvilken side problemet ble funnet på og evt. hvilken fil dette r
 Observerte bugs:
 
 Change image in anatomi to a landscape image. It makes the courseDetail-page look wonky
+Landing page on "log in" does not route to anything if no route is provided in the url-bar (ex. /dinside).
+Input fields on login-page moves when the error is displayed
