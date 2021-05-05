@@ -21,18 +21,16 @@ export class Kursoversikt extends React.Component {
         // @ts-ignore
         const {error, courseDetails} = this.state;
         // @ts-ignore
-        let {courses, searchValues, filteredCourses} = this.props;
+        let {courses, searchValues, filtering} = this.props;
         if (searchValues === null) {
             return <div>Nothing found!</div>
         } else if (searchValues.length > 0) {
             courses = searchValues;
         }
-        if (filteredCourses && filteredCourses.length > 0) {
-            return <div>{filteredCourses}I filter!</div>
-        }
         if (error) {
             return <div>{error}!</div>
         }
+        //@ts-ignore
         const courseCard = courses
             // @ts-ignore
             .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
@@ -75,6 +73,7 @@ export class Kursoversikt extends React.Component {
             // @ts-ignore
             courseDetails ? <Kurs course={courseDetails}/> :
                 <div className={'coursesContainer'}>
+                    {filtering && <div>Filtering!</div>}
                     {courseCard}
                 </div>
         );

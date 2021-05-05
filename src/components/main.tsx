@@ -37,7 +37,7 @@ export default class Main extends React.Component {
       myCourses: [],
       searchParam: '',
       mainCourses: [],
-      filteredCourses: []
+      filtering: false,
     }
   }
 
@@ -66,8 +66,9 @@ export default class Main extends React.Component {
     //@ts-ignore
     if (!this.state.trayState) {
       this.setState({
-        //@ts-ignore
-        trayState: <Filter closeFunction={this.closeTray.bind(this)}  setFilteredCourses={this.setFilteredCourses.bind(this)}/>
+        filtering: true,
+        // @ts-ignore
+        trayState: <Filter filtering={true} closeFunction={this.closeTray.bind(this)} setFilteringState={this.setFilteringState.bind(this)} setMyCourses={this.setMyCourses.bind(this)} setCourses={this.setCourses.bind(this)}/>
       })
       return;
     } else {
@@ -80,7 +81,6 @@ export default class Main extends React.Component {
   closeTray(): void {
     this.setState({
       trayState: null,
-      filteredCourses: [],
     })
   }
 
@@ -154,10 +154,6 @@ export default class Main extends React.Component {
     }
   }
 
-  setFilteredCourses(courses:any) {
-    this.setState({ filteredCourses: courses})
-  }
-
   setMyCourses(courses: any) {
     this.setState({myCourses:courses})
   }
@@ -165,7 +161,11 @@ export default class Main extends React.Component {
     await this.setState({mainCourses:courses})
   }
 
-  closeSearch(str: string){
+  setCourses(courses: any) {
+    this.setState({courses:courses})
+  }
+
+  async closeSearch(str: string){
     this.setState({searching: false, searchValues: []})
     switch (str) {
       case 'dinSide': {
@@ -177,10 +177,34 @@ export default class Main extends React.Component {
         break;
       }
       default: {
-        this.setState({searchParam: 'courses'})
+        this.setState({searchParam: 'courses', filtering: false})
+        //@ts-ignore
+        try {
+          // @ts-ignore
+          const courses = await getAllCourses();
+          if (!courses) {
+            this.setState({
+              error: 'Could not find courses!'
+            })
+            return;
+          }
+          // @ts-ignore
+          this.setState({courses});
+        } catch (error) {
+          this.setState({
+            error: 'Something went wrong!'
+          })
+          return;
+        }
         break;
       }
     }
+  }
+
+  setFilteringState(bool: boolean){
+    this.setState({
+      filtering: bool,
+    })
   }
 
   render() {
