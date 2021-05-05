@@ -1,6 +1,6 @@
 import React from 'react';
 import jwt_decode from "jwt-decode";
-import {SimpleTable, Avatar, Stack} from "@dossier/mithra-ui";
+import {SimpleTable, Avatar, Button, Input, FormLabel} from "@dossier/mithra-ui";
 
 const axios = require('axios');
 const serverUrl = process.env.REACT_APP_SERVER_URL
@@ -26,6 +26,12 @@ export class Profile extends React.Component {
       data: {userId}
     })
     return result;
+  }
+
+  handleEditProfile() {
+
+    // @ts-ignore
+    const newPhoneNumber = document.getElementById('tlfnr').innerText
   }
 
 
@@ -60,28 +66,21 @@ export class Profile extends React.Component {
       return <div>{loginError}!</div>
     }
     const profilePicture = user.profile_picture;
-    console.log(user)
     let initials;
-    if(user.frist_name) {
-      initials  = user.first_name.slice(0, 1).concat(user.last_name.slice(0,1))
+    if(user.first_name) {
+      initials = user.first_name.slice(0, 1).concat(user.last_name.slice(0, 1))
     }
+
 
     return (
       <div>
         <SimpleTable>
-          {/*{profilePicture ?*/}
-            <Avatar
-              imageUrl={profilePicture}
-              initials={initials}
-              size="128px"
-              title="Arnold Westover"
-            />
-          {/*:*/}
-          {/*  <div>*/}
-          {/*    /!*{user.first_name.slice(0,1)}*!/*/}
-          {/*    no picture*/}
-          {/*  </div>*/}
-          {/*}*/}
+          <Avatar
+            imageUrl={profilePicture}
+            initials={initials}
+            size="128px"
+            title="Profile picture"
+          />
           <tbody>
           <tr>
             <th>
@@ -133,7 +132,21 @@ export class Profile extends React.Component {
           </tr>
           </tbody>
         </SimpleTable>
+
+
+        <FormLabel
+          htmlFor="tlfnr"
+          label="Telefonnummer"
+        />
+        <Input
+          id="tlfnr"
+          placeholder={user.phone_number}
+        />
+        <Button variant="primary" type="submit" onClick={() => this.handleEditProfile()}>
+          Endre profil
+        </Button>
+
       </div>
-    )
+    );
   }
 }

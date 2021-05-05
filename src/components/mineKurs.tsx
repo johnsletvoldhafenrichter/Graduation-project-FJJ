@@ -46,7 +46,9 @@ export class MineKurs extends React.Component{
     // @ts-ignore
     const {error} = this.state;
     if(error) {
+      console.log(error)
       return <div>ERROR!!!</div>
+
     }
     //@ts-ignore
     let {myCourses, activeTab} = this.state;
@@ -105,19 +107,19 @@ export class MineKurs extends React.Component{
             active={activeTab === "enrolledCourses"}
             onClick={() => this.handleClickTab("enrolledCourses")}
           >
-            Påmeldte kurs
+            Kommende
           </Tab>
           <Tab
             active={activeTab === "startedCourses"}
             onClick={() => this.handleClickTab("startedCourses")}
           >
-            Påbegynte kurs
+            Pågående
           </Tab>
           <Tab
             active={activeTab === "competedCourses"}
             onClick={() => this.handleClickTab("competedCourses")}
           >
-            Fullførte kurs
+            Fullførte
           </Tab>
         </Stack>
 

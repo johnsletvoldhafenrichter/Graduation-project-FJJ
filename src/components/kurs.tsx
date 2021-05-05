@@ -1,14 +1,15 @@
 import {getCourseById} from "../functions/kursFunctions";
 import React from "react";
-import {SimpleTable} from "@dossier/mithra-ui";
+import {Card, H5, H6, SimpleTable, SubTitle2, Text} from "@dossier/mithra-ui";
 import '../css/kurs.css'
 
 export class Kurs extends React.Component {
     constructor(props: {}) {
         super(props);
         this.state = {
-            course: {},
-            error: ''
+            course: [],
+            error: '',
+            courseLocationArray: []
         }
     }
 
@@ -23,7 +24,10 @@ export class Kurs extends React.Component {
                 })
                 return;
             }
-            this.setState({course: course.data})
+            this.setState({course: course.data[0]})
+            let courseLocationArray: string[] = [];
+            course.data.forEach((course: { location_name: string; }) => courseLocationArray.push(course.location_name))
+            this.setState({courseLocationArray})
 
         } catch (error) {
             this.setState({
@@ -36,6 +40,18 @@ export class Kurs extends React.Component {
     render() {
         //@ts-ignore
         const courseDetail = this.state.course;
+        //@ts-ignore
+        const {courseLocationArray} = this.state;
+        // @ts-ignore
+        const courseLocationElements = courseLocationArray.map(({location_name}) => {
+              return (
+                  <br>
+                    {location_name}
+                  </br>
+
+              )}
+            );
+
         let {image_url,
             image_description,
             course_name,
@@ -88,6 +104,11 @@ export class Kurs extends React.Component {
 
                             <h4 className={'dateTit'}>Enrollment End:</h4>
                             <p className={'dateDisp'}>{enrollment_end}</p>
+
+                            <h4 className={'dateTit'}>Tilbys ved:</h4>
+                            <div>{courseLocationArray}</div>
+
+
                             <div>
                                 <h4 className={'dateTit'}>
                                     Organization:

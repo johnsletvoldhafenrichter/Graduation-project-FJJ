@@ -1,5 +1,5 @@
-LES DETTE:
-Skriv en beskrivelse av funet bug her. Vær så detaljert som mulig slik at det er enkelt å gjenskape problemet. Husk
+    **LES DETTE**
+Skriv en beskrivelse av funnet bug her. Vær så detaljert som mulig slik at det er enkelt å gjenskape problemet. Husk
 henvisning til hvilken side problemet ble funnet på og evt. hvilken fil dette relaterer til.
 
 Observerte bugs:
@@ -8,3 +8,5 @@ Change image in anatomi to a landscape image. It makes the courseDetail-page loo
 Landing page on "log in" does not route to anything if no route is provided in the url-bar (ex. /dinside).
 Input fields on login-page moves when the error is displayed
 din side state til empty array
+Tittel på sdien man er i er låst til "Min Side". Denne må gjøres dynamisk
+"Mine kurs" og "Din side" kræsjer hvis brukeren ikke har kurs (ingenting hentes fra databasen). Alt som dukker opp på skjermen er en error melding, men taben skal renderes.
