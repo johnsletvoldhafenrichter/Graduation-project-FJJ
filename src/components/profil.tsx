@@ -60,12 +60,10 @@ export class Profile extends React.Component {
       return <div>{loginError}!</div>
     }
     const profilePicture = user.profile_picture;
-    console.log(user)
     let initials;
-    if(user.frist_name) {
-      initials  = user.first_name.slice(0, 1).concat(user.last_name.slice(0,1))
+    if(user.first_name) {
+      initials = user.first_name.slice(0, 1).concat(user.last_name.slice(0, 1))
     }
-
     return (
       <div>
         <SimpleTable>
