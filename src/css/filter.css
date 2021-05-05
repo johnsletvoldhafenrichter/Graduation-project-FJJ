@@ -1,0 +1,14 @@
+.tagParent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag {
+    flex-grow: 0;
+    flex-shrink: 1;
+    padding: 5px;
+    margin: 5px;
+    border: solid 2px grey;
+    border-radius: 3px;
+    text-align: center;
+}
