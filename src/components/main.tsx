@@ -37,6 +37,7 @@ export default class Main extends React.Component {
       searchParam: '',
       mainCourses: [],
       filtering: false,
+      siteHeader: ''
     }
   }
 
@@ -199,6 +200,10 @@ export default class Main extends React.Component {
     }
   }
 
+  setSiteHeaderDynamically(siteHeader: string){
+    this.setState({siteHeader})
+  }
+
   setFilteringState(bool: boolean){
     this.setState({
       filtering: bool,
@@ -208,6 +213,8 @@ export default class Main extends React.Component {
   render() {
     //@ts-ignore
     const {courses, searching, searchValues, mainCourses} = this.state;
+    //@ts-ignore
+    const {siteHeader} = this.state;
     //@ts-ignore
     const tray = this.state.trayState;
     return (
@@ -233,7 +240,7 @@ export default class Main extends React.Component {
                   onClick={(event: any) => this.changeTray('filter', event)}/>}
             </>
           }
-          headerText="Min side"
+          headerText={siteHeader}
           navbarSections=
             {
               <>
@@ -241,26 +248,27 @@ export default class Main extends React.Component {
                   <NavbarButton
                     icon="AdminHome"
                     text="Min side"
-                    onClick={()=> this.closeSearch('dinSide')}
+                    onClick={()=> {this.closeSearch('dinSide'); this.setSiteHeaderDynamically('Min Side')}}
                     as={Link}
                     to="/dinside"/>
                   <NavbarButton
                     icon="UserPlans"
                     text="Mine kurs"
-                    onClick={()=> this.closeSearch('mineKurs')}
+                    onClick={()=> {this.closeSearch('mineKurs'); this.setSiteHeaderDynamically('Mine Kurs')}}
                     as={Link}
                     to="/mycourses"
                   />
                   <NavbarButton
                     icon="Learn"
                     text="Kursoversikt"
-                    onClick={()=> this.closeSearch('kursoversikt')}
+                    onClick={()=> {this.closeSearch('kursoversikt'); this.setSiteHeaderDynamically('Kursoversikt')}}
                     as={Link}
                     to="/courses"/>
                   <NavbarButton
                     icon="User"
                     text="Profil"
                     as={Link}
+                    onClick={ ()=> {this.setSiteHeaderDynamically('Profil')}}
                     to="/profile"/>
                   <NavbarButton
                     onClick={() => logoutfunction()}
