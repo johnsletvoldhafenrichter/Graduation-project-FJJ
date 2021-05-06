@@ -1,6 +1,6 @@
 import React from 'react';
 import jwt_decode from "jwt-decode";
-import {SimpleTable, Avatar, Button, Input, FormLabel} from "@dossier/mithra-ui";
+import {SimpleTable, Avatar} from "@dossier/mithra-ui";
 import '../css/profile.css';
 
 const axios = require('axios');

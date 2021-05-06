@@ -37,6 +37,7 @@ interface MainState {
     mainCourses: [];
     filtering: boolean;
     error?: any;
+    siteHeader: string;
 }
 
 export default class Main extends React.Component<IProps, MainState> {

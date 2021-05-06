@@ -1,6 +1,7 @@
 import React from "react";
 import {getCourses} from "../functions/mineKursFunctions";
 import {Card, H5, H6, SubTitle2, Text, Stack, Tab} from "@dossier/mithra-ui";
+import '../css/courseCards.css';
 
 export class MineKurs extends React.Component{
   constructor(props: any) {
@@ -102,7 +103,7 @@ export class MineKurs extends React.Component{
       });
 
     return(
-      <div>
+      <div className="minSideContainer">
 
         {/*Tab buttons*/}
 

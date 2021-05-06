@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { config } from 'dotenv';
+import {config} from 'dotenv';
 import './css/index.css';
 import App from './App';
 import "@dossier/mithra-ui/dist/ds.css"
@@ -11,7 +11,7 @@ config();
 ReactDOM.render(
     <React.StrictMode>
         <MithraProvider>
-            <App/>
+                <App/>
         </MithraProvider>
     </React.StrictMode>,
     document.getElementById('root')
