@@ -3,7 +3,10 @@
     grid-template-rows: auto auto auto;
     align-items: center;
     justify-content: center;
-    /*height: 80vh;*/
+    background:url("../assets/boxes.svg");
+    box-shadow: 0 0 20px 20px white inset;
+    height: 90vh;
+    padding: 0 1rem;
 }
 
 .infoContainer {

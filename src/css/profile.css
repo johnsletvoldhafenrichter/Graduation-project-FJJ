@@ -3,6 +3,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background:url("../assets/boxes.svg");
+    box-shadow: 0 0 20px 20px white inset;
+    height: 90vh;
+    padding: 0 1rem;
 }
 
 .profilePicture {
