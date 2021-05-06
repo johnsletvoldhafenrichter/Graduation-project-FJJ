@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
 } from "react-router-dom";
 import {
-  ApplicationLayout,
-  PageHeaderButton,
-  NavbarSection,
-  NavbarButton,
-  Input,
+    ApplicationLayout,
+    PageHeaderButton,
+    NavbarSection,
+    NavbarButton,
+    Input,
 } from "@dossier/mithra-ui";
 
 
@@ -23,182 +23,180 @@ import {Filter} from "./filter";
 import {MineKurs} from './mineKurs';
 import {getAllCourses} from "../functions/kursoversiktFunction";
 
-export default class Main extends React.Component {
-  constructor(props: {}) {
-    super(props);
+interface IProps {
+}
 
-    this.state = {
-      trayState: null,
-      searching: false,
-      searchField: '',
-      courses: [],
-      searchValues: [],
-      myCourses: [],
-      searchParam: '',
-      mainCourses: [],
-      filtering: false,
-      siteHeader: ''
-    }
-  }
+interface MainState {
+    trayState: any;
+    searching: boolean;
+    searchField: string;
+    courses: [];
+    searchValues: null | [];
+    myCourses: [];
+    searchParam: string;
+    mainCourses: [];
+    filtering: boolean;
+    error?: any;
+}
 
-  async componentDidMount() {
-    //@ts-ignore
-    try {
-      // @ts-ignore
-          const courses = await getAllCourses();
-      if (!courses) {
-        this.setState({
-          error: 'Could not find courses!'
-        })
-        return;
-      }
-      // @ts-ignore
-      this.setState({courses});
-    } catch (error) {
-      this.setState({
-        error: 'Something went wrong!'
-      })
-      return;
-    }
-  }
+export default class Main extends React.Component<IProps, MainState> {
+    constructor(props: IProps) {
+        super(props);
 
-  changeTray(trayName: string, event: any): void {
-    //@ts-ignore
-    if (!this.state.trayState) {
-      this.setState({
-        // @ts-ignore
-        trayState: <Filter filtering={true} closeFunction={this.closeTray.bind(this)} setFilteringState={this.setFilteringState.bind(this)} setMyCourses={this.setMyCourses.bind(this)} setCourses={this.setCourses.bind(this)} setMainCourses={this.setMainCourses.bind(this)}/>
-      })
-      return;
-    } else {
-      this.setState({
-        trayState: null,
-      })
-    }
-  }
-
-  closeTray(): void {
-    this.setState({
-      trayState: null,
-    })
-  }
-
-  handleSearch() {
-    // @ts-ignore
-    this.setState({searching: !this.state.searching, searchValues: []})
-  }
-
-  handleChangeSearch(event: { target: any }) {
-    this.setState({searchField: event.target.value})
-    // @ts-ignore
-    this.checkForResultsSearch(this.state.searchParam)
-  }
-
-  async checkForResultsSearch(str:any) {
-    if (str === 'courses') {
-      //@ts-ignore
-      const currentString = this.state.searchField
-      //@ts-ignore
-      let courses = this.state.courses.slice()
-      //@ts-ignore
-      let searchValues = [];
-      for (let i = 0; i < courses.length; i++) {
-        if (courses[i].course_name.toLowerCase().includes(currentString)) {
-          searchValues.push(courses[i])
+        this.state = {
+            trayState: null,
+            searching: false,
+            searchField: '',
+            courses: [],
+            searchValues: [],
+            myCourses: [],
+            searchParam: '',
+            mainCourses: [],
+            filtering: false,
+            error: '',          
+            siteHeader: ''
         }
-      }
-      if (searchValues.length < 1) {
-        //@ts-ignore
-        searchValues = null;
-      }
-      // @ts-ignore
-      await this.setState({searchValues})
-    } else if (str === 'myCourses') {
-      //@ts-ignore
-      const currentString = this.state.searchField
-      //@ts-ignore
-      let courses = this.state.myCourses.slice()
-      //@ts-ignore
-      let searchValues = [];
-      for (let i = 0; i < courses.length; i++) {
-        if (courses[i].course_name.toLowerCase().includes(currentString)) {
-          searchValues.push(courses[i])
-        }
-      }
-      if (searchValues.length < 1) {
-        //@ts-ignore
-        searchValues = null;
-      }
-      // @ts-ignore
-
-      await this.setState({searchValues})
-    } else if (str === 'mainCourses') {
-      //@ts-ignore
-      const currentString = this.state.searchField
-      //@ts-ignore
-      let courses = this.state.mainCourses.slice()
-      //@ts-ignore
-      let searchValues = [];
-      for (let i = 0; i < courses.length; i++) {
-        if (courses[i].course_name.toLowerCase().includes(currentString)) {
-          searchValues.push(courses[i])
-        }
-      }
-      if (searchValues.length < 1) {
-        //@ts-ignore
-        searchValues = null;
-      }
-      // @ts-ignore
-      await this.setState({searchValues})
     }
-  }
 
-  setMyCourses(courses: any) {
-    this.setState({myCourses:courses})
-  }
-  async setMainCourses(courses: any) {
-    await this.setState({mainCourses:courses})
-  }
-
-  setCourses(courses: any) {
-    this.setState({courses:courses})
-  }
-
-  async closeSearch(str: string){
-    this.setState({searching: false, searchValues: []})
-    switch (str) {
-      case 'dinSide': {
-        this.setState({searchParam: 'mainCourses', filtering: false})
-        break;
-      }
-      case 'mineKurs': {
-        this.setState({searchParam: 'myCourses', filtering: false})
-        break;
-      }
-      default: {
-        this.setState({searchParam: 'courses', filtering: false})
-        //@ts-ignore
+    async componentDidMount() {
         try {
-          // @ts-ignore
-          const courses = await getAllCourses();
-          if (!courses) {
+            const courses = await getAllCourses();
+            if (!courses) {
+                this.setState({
+                    error: 'Could not find courses!'
+                })
+                return;
+            }
+            this.setState({courses});
+        } catch (error) {
             this.setState({
-              error: 'Could not find courses!'
+                error: 'Something went wrong!'
             })
             return;
-          }
-          // @ts-ignore
-          this.setState({courses});
-        } catch (error) {
-          this.setState({
-            error: 'Something went wrong!'
-          })
-          return;
         }
-        break;
-      }
     }
-  }
+
+    changeTray(trayName: string, event: any): void {
+        if (!this.state.trayState) {
+            this.setState({
+                trayState: <Filter filtering={true} closeFunction={this.closeTray.bind(this)}
+                                   setFilteringState={this.setFilteringState.bind(this)}
+                                   setMyCourses={this.setMyCourses.bind(this)} setCourses={this.setCourses.bind(this)}
+                                   setMainCourses={this.setMainCourses.bind(this)}/>
+            })
+            return;
+        } else {
+            this.setState({
+                trayState: null,
+            })
+        }
+    }
+
+    closeTray(): void {
+        this.setState({
+            trayState: null,
+        })
+    }
+
+    handleSearch() {
+        this.setState({searching: !this.state.searching, searchValues: []})
+    }
+
+    handleChangeSearch(event: { target: any }) {
+        this.setState({searchField: event.target.value})
+        this.checkForResultsSearch(this.state.searchParam)
+    }
+
+    async checkForResultsSearch(str: any) {
+        if (str === 'courses') {
+            const currentString = this.state.searchField
+            let courses = this.state.courses.slice()
+            let searchValues: null | [] = [];
+            for (let i = 0; i < courses.length; i++) {
+                //@ts-ignore
+                if (courses[i].course_name.toLowerCase().includes(currentString)) {
+                    searchValues.push(courses[i])
+                }
+            }
+            if (searchValues.length < 1) {
+                searchValues = null;
+            }
+            await this.setState({searchValues})
+        } else if (str === 'myCourses') {
+            const currentString = this.state.searchField
+            let courses = this.state.myCourses.slice()
+            let searchValues: null | [] = [];
+            for (let i = 0; i < courses.length; i++) {
+                //@ts-ignore
+                if (courses[i].course_name.toLowerCase().includes(currentString)) {
+                    searchValues.push(courses[i])
+                }
+            }
+            if (searchValues.length < 1) {
+                searchValues = null;
+            }
+            await this.setState({searchValues})
+        } else if (str === 'mainCourses') {
+            const currentString = this.state.searchField
+            let courses = this.state.mainCourses.slice()
+            let searchValues: null | [] = [];
+            for (let i = 0; i < courses.length; i++) {
+                //@ts-ignore
+                if (courses[i].course_name.toLowerCase().includes(currentString)) {
+                    searchValues.push(courses[i])
+                }
+            }
+            if (searchValues.length < 1) {
+                searchValues = null;
+            }
+            await this.setState({searchValues})
+        }
+    }
+
+    setMyCourses(courses: any) {
+        this.setState({myCourses: courses})
+    }
+
+    setMainCourses(courses: any) {
+        this.setState({mainCourses: courses})
+    }
+
+    setCourses(courses: any) {
+        this.setState({courses: courses})
+    }
+
+    async closeSearch(str: string) {
+        this.setState({searching: false, searchValues: []})
+        switch (str) {
+            case 'dinSide': {
+                this.setState({searchParam: 'mainCourses', filtering: false})
+                break;
+            }
+            case 'mineKurs': {
+                this.setState({searchParam: 'myCourses', filtering: false})
+                break;
+            }
+            default: {
+                this.setState({searchParam: 'courses', filtering: false})
+                try {
+                    const courses = await getAllCourses();
+                    if (!courses) {
+                        this.setState({
+                            error: 'Could not find courses!'
+                        })
+                        return;
+                    }
+                    this.setState({courses});
+                } catch (error) {
+                    this.setState({
+                        error: 'Something went wrong!'
+                    })
+                    return;
+                }
+                break;
+            }
+        }
+    }
 
   setSiteHeaderDynamically(siteHeader: string){
     this.setState({siteHeader})
