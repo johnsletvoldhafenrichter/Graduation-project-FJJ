@@ -1,0 +1,10 @@
+.profilePageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profilePicture {
+    margin: 5%;
+}
