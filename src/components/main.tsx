@@ -53,7 +53,8 @@ export default class Main extends React.Component<IProps, MainState> {
             searchParam: '',
             mainCourses: [],
             filtering: false,
-            error: '',
+            error: '',          
+            siteHeader: ''
         }
     }
 
@@ -197,118 +198,123 @@ export default class Main extends React.Component<IProps, MainState> {
         }
     }
 
-    setFilteringState(bool: boolean) {
-        this.setState({
-            filtering: bool,
-        })
-    }
+  setSiteHeaderDynamically(siteHeader: string){
+    this.setState({siteHeader})
+  }
 
-    render() {
-        const {courses, searching, searchValues, mainCourses} = this.state;
-        const tray = this.state.trayState;
-        return (
-            <Router>
-                <ApplicationLayout
-                    headerButtons={
-                        <>
-                            <PageHeaderButton
-                                icon="Search"
-                                text="Søk"
-                                onClick={() => this.handleSearch()}
-                            />
-                            {searching ?
-                                <Input
-                                    style={{flex: 1, marginLeft: 10}}
-                                    id="search-field"
-                                    placeholder="Søk her..."
-                                    onChange={(event: any) => this.handleChangeSearch(event)}
-                                /> :
-                                <PageHeaderButton
-                                    icon="Filter"
-                                    text="Filter"
-                                    onClick={(event: any) => this.changeTray('filter', event)}/>}
-                        </>
-                    }
-                    headerText="Min side"
-                    navbarSections=
-                        {
-                            <>
-                                <NavbarSection>
-                                    <NavbarButton
-                                        icon="AdminHome"
-                                        text="Min side"
-                                        onClick={() => this.closeSearch('dinSide')}
-                                        as={Link}
-                                        to="/dinside"/>
-                                    <NavbarButton
-                                        icon="UserPlans"
-                                        text="Mine kurs"
-                                        onClick={() => this.closeSearch('mineKurs')}
-                                        as={Link}
-                                        to="/mycourses"
-                                    />
-                                    <NavbarButton
-                                        icon="Learn"
-                                        text="Kursoversikt"
-                                        onClick={() => this.closeSearch('kursoversikt')}
-                                        as={Link}
-                                        to="/courses"/>
-                                    <NavbarButton
-                                        icon="User"
-                                        text="Profil"
-                                        as={Link}
-                                        to="/profile"/>
-                                    <NavbarButton
-                                        onClick={() => logoutfunction()}
-                                        icon="Logout"
-                                        text="Logg ut"/>
-                                </NavbarSection>
-                            </>
-                        }
-                    pageType="user"
-                    tray={tray}
-                    isMainPage>
-                    <div className="App ds-typography-body">
-                        <Switch>
-                            <Route path="/dinside"
-                                   render={(props) => (
-                                       // @ts-ignore
-                                       <DinSide {...props} mainCourses={mainCourses}
-                                                setMainCourses={this.setMainCourses.bind(this)}
-                                                searchValues={searchValues} filtering={this.state.filtering}/>
-                                   )}>
-                            </Route>
-                            <Route path='/profile'
-                                   render={(props) => (
-                                       <Profile {...props}/>
-                                   )}>
-                            </Route>
-                            <Route
-                                path='/courses'
-                                render={(props) => (
-                                    // @ts-ignore
-                                    <Kursoversikt {...props} courses={courses} searchValues={searchValues}
-                                                  filtering={this.state.filtering}/>
-                                )}>
-                            </Route>
-                            <Route
-                                path='/coursedetails/:id'
-                                render={(props) => (
-                                    <Kurs {...props} />
-                                )}>
-                            </Route>
-                            <Route
-                                path='/mycourses'
-                                render={(props) => (
-                                    // @ts-ignore
-                                    <MineKurs {...props} setMyCourses={this.setMyCourses.bind(this)}
-                                              searchValues={searchValues} filtering={this.state.filtering}/>
-                                )}>
-                            </Route>
-                        </Switch>
-                    </div>
-                </ApplicationLayout>
-            </Router>
-        )
-    }
+  setFilteringState(bool: boolean){
+    this.setState({
+      filtering: bool,
+    })
+  }
+
+  render() {
+    //@ts-ignore
+    const {courses, searching, searchValues, mainCourses} = this.state;
+    //@ts-ignore
+    const {siteHeader} = this.state;
+    //@ts-ignore
+    const tray = this.state.trayState;
+    return (
+      <Router>
+        <ApplicationLayout
+          headerButtons={
+            <>
+              <PageHeaderButton
+                icon="Search"
+                text="Søk"
+                onClick={() => this.handleSearch()}
+              />
+              {searching ?
+                <Input
+                  style={{flex: 1, marginLeft: 10}}
+                  id="search-field"
+                  placeholder="Søk her..."
+                  onChange={(event: any) => this.handleChangeSearch(event)}
+                /> :
+                <PageHeaderButton
+                  icon="Filter"
+                  text="Filter"
+                  onClick={(event: any) => this.changeTray('filter', event)}/>}
+            </>
+          }
+          headerText={siteHeader}
+          navbarSections=
+            {
+              <>
+                <NavbarSection>
+                  <NavbarButton
+                    icon="AdminHome"
+                    text="Min side"
+                    onClick={()=> {this.closeSearch('dinSide'); this.setSiteHeaderDynamically('Min Side')}}
+                    as={Link}
+                    to="/dinside"/>
+                  <NavbarButton
+                    icon="UserPlans"
+                    text="Mine kurs"
+                    onClick={()=> {this.closeSearch('mineKurs'); this.setSiteHeaderDynamically('Mine Kurs')}}
+                    as={Link}
+                    to="/mycourses"
+                  />
+                  <NavbarButton
+                    icon="Learn"
+                    text="Kursoversikt"
+                    onClick={()=> {this.closeSearch('kursoversikt'); this.setSiteHeaderDynamically('Kursoversikt')}}
+                    as={Link}
+                    to="/courses"/>
+                  <NavbarButton
+                    icon="User"
+                    text="Profil"
+                    as={Link}
+                    onClick={ ()=> {this.setSiteHeaderDynamically('Profil')}}
+                    to="/profile"/>
+                  <NavbarButton
+                    onClick={() => logoutfunction()}
+                    icon="Logout"
+                    text="Logg ut"/>
+                </NavbarSection>
+              </>
+            }
+          pageType="user"
+          tray={tray}
+          isMainPage>
+          <div className="App ds-typography-body">
+            <Switch>
+              <Route path="/dinside"
+                     render={(props) => (
+                       // @ts-ignore
+                       <DinSide {...props} mainCourses={mainCourses} setMainCourses={this.setMainCourses.bind(this)} searchValues={searchValues}  filtering={this.state.filtering}/>
+                     )}>
+              </Route>
+              <Route path='/profile'
+                     render={(props) => (
+                       <Profile {...props}/>
+                     )}>
+              </Route>
+              <Route
+                path='/courses'
+                render={(props) => (
+                  // @ts-ignore
+                  <Kursoversikt {...props} courses={courses} searchValues={searchValues} filtering={this.state.filtering}/>
+                )}>
+              </Route>
+              <Route
+                path='/coursedetails/:id'
+                render={(props) => (
+                  <Kurs {...props} />
+                )}>
+              </Route>
+              <Route
+                path='/mycourses'
+                render={(props) => (
+                  // @ts-ignore
+                  <MineKurs {...props} setMyCourses={this.setMyCourses.bind(this)} searchValues={searchValues} filtering={this.state.filtering}/>
+                )}>
+              </Route>
+            </Switch>
+          </div>
+        </ApplicationLayout>
+      </Router>
+    )
+  }
 }

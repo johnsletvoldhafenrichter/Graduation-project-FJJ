@@ -1,6 +1,7 @@
 import React from 'react';
 import jwt_decode from "jwt-decode";
 import {SimpleTable, Avatar, Button, Input, FormLabel} from "@dossier/mithra-ui";
+import '../css/profile.css';
 
 const axios = require('axios');
 const serverUrl = process.env.REACT_APP_SERVER_URL
@@ -73,14 +74,18 @@ export class Profile extends React.Component {
 
 
     return (
-      <div>
-        <SimpleTable>
+      <div className={'profilePageContainer'}>
+
           <Avatar
             imageUrl={profilePicture}
             initials={initials}
             size="128px"
             title="Profile picture"
+            className={'profilePicture'}
+
           />
+
+        <SimpleTable>
           <tbody>
           <tr>
             <th>
@@ -133,18 +138,18 @@ export class Profile extends React.Component {
           </tbody>
         </SimpleTable>
 
-
-        <FormLabel
-          htmlFor="tlfnr"
-          label="Telefonnummer"
-        />
-        <Input
-          id="tlfnr"
-          placeholder={user.phone_number}
-        />
-        <Button variant="primary" type="submit" onClick={() => this.handleEditProfile()}>
-          Endre profil
-        </Button>
+        {/* Future edit field for personal information */}
+        {/*<FormLabel*/}
+        {/*  htmlFor="tlfnr"*/}
+        {/*  label="Telefonnummer"*/}
+        {/*/>*/}
+        {/*<Input*/}
+        {/*  id="tlfnr"*/}
+        {/*  placeholder={user.phone_number}*/}
+        {/*/>*/}
+        {/*<Button variant="primary" type="submit" onClick={() => this.handleEditProfile()}>*/}
+        {/*  Endre profil*/}
+        {/*</Button>*/}
 
       </div>
     );
