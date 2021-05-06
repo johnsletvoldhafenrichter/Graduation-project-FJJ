@@ -32,6 +32,9 @@
     font-size: 14px;
     font-weight: bold;
 }
+.ds-button-base.ds-tab:hover {
+    background-color: #eff5fa !important;
+}
 .dateContainer {
     flex: 1;
     width: 100%;
