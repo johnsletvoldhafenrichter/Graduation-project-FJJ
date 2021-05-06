@@ -37,6 +37,7 @@ interface MainState {
     mainCourses: [];
     filtering: boolean;
     error?: any;
+    siteHeader: string;
 }
 
 export default class Main extends React.Component<IProps, MainState> {
@@ -54,7 +55,7 @@ export default class Main extends React.Component<IProps, MainState> {
             mainCourses: [],
             filtering: false,
             error: '',          
-            siteHeader: ''
+            siteHeader: 'Min Side'
         }
     }
 

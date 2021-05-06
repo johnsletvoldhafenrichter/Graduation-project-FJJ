@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, H5, Text, H6, SubTitle2} from "@dossier/mithra-ui";
+import {Card, H5, Text, H6, SubTitle2, Tag, SimpleTable} from "@dossier/mithra-ui";
 import {Kurs} from "./kurs";
 import '../css/courseCards.css';
 
@@ -16,12 +16,19 @@ export class Kursoversikt extends React.Component {
         const {history} = this.props;
         history.push("/coursedetails/" + courseId);
     }
+    formatDate(date: any) {
+        let day = date.slice(8,10);
+        let month = date.slice(5, 7)
+        let year = date.slice(0,4)
+        return  `${day}-${month}-${year}`;
+    }
 
     render() {
         // @ts-ignore
         const {error, courseDetails} = this.state;
         // @ts-ignore
         let {courses, searchValues, filtering} = this.props;
+
         if (searchValues === null) {
             return <div>Nothing found!</div>
         } else if (searchValues.length > 0) {
@@ -44,27 +51,22 @@ export class Kursoversikt extends React.Component {
                         <div className={'dateContainer'}>
                             <Text className={'dateStyles'}>
                                 <SubTitle2 className={'dateTitleStyle'}>
-                                    Start dato
+                                    Oppmeldingsfrist
                                 </SubTitle2>
-                                {start_date.slice(0, 10)}
+                                {this.formatDate(enrollment_end)}
                             </Text>
                             <Text className={'dateStyles'}>
                                 <SubTitle2 className={'dateTitleStyle'}>
-                                    Slutt dato
+                                    Start dato
                                 </SubTitle2>
-                                {end_date.slice(0, 10)}
+                                {this.formatDate(start_date)}
                             </Text>
                         </div>
-                        <div className={'enrollmentContainer'}>
-                            <H6 className={'H6Styles'}>
-                                Oppmeldingsfrist
-                            </H6>
-                            <H6 className={'dateTitleStyle'}>
-                                {enrollment_end.slice(0, 10)}
-                            </H6>
-                        </div>
                         <Text className={'H6Styles'}>
-                            Tilbyder: {org}
+                            Tilbyder: <Tag
+                            intent="neutral"
+                            text={org}
+                        />
                         </Text>
                     </Card>
                 );
