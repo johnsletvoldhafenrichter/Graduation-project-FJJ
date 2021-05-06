@@ -123,7 +123,7 @@ export class Kurs extends React.Component {
 
                 <div>
                     <h4 className={'descTit'}>
-                        Description:
+                        Beskrivelse:
                     </h4>
                     <p className={'descPar'}>
                         {course_description}
