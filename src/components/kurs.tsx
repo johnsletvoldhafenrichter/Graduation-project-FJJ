@@ -37,6 +37,13 @@ export class Kurs extends React.Component {
         }
     }
 
+    formatDate(date: any) {
+        let day = date.slice(8,10);
+        let month = date.slice(5, 7)
+        let year = date.slice(0,4)
+        return  `${day}-${month}-${year}`;
+    }
+
     render() {
         //@ts-ignore
         const courseDetail = this.state.course;
@@ -67,10 +74,10 @@ export class Kurs extends React.Component {
         } = courseDetail;
 
         if (start_date && end_date && enrollment_start && enrollment_end) {
-            start_date = start_date.slice(0, 10);
-            end_date = end_date.slice(0, 10);
-            enrollment_start = enrollment_start.slice(0, 10);
-            enrollment_end = enrollment_end.slice(0, 10);
+            start_date = this.formatDate(start_date);
+            end_date = this.formatDate(end_date);
+            enrollment_start = this.formatDate(enrollment_start);
+            enrollment_end = this.formatDate(enrollment_end);
         }
 
         // @ts-ignore
@@ -96,29 +103,27 @@ export class Kurs extends React.Component {
 
                     {/* Course Description Table */}
                     <div className={'infoContainer'} id={'tableContainer'}>
+                            <h4 className={'dateTit'} id={'startDateTit'}>Startdato:</h4>
+                            <p className={'dateDisp'}>{start_date}</p>
 
-                        <h4 className={'dateTit'} id={'startDateTit'}>Course Start:</h4>
-                        <p className={'dateDisp'}>{start_date}</p>
+                            <h4 className={'dateTit'}>Sluttdato:</h4>
+                            <p className={'dateDisp'}>{end_date}</p>
 
-                        <h4 className={'dateTit'}>Course End:</h4>
-                        <p className={'dateDisp'}>{end_date}</p>
+                            <h4 className={'dateTit'}>Oppmeldingsstart:</h4>
+                            <p className={'dateDisp'}>{enrollment_start}</p>
 
-                        <h4 className={'dateTit'}>Enrollment Start:</h4>
-                        <p className={'dateDisp'}>{enrollment_start}</p>
-
-                        <h4 className={'dateTit'}>Enrollment End:</h4>
-                        <p className={'dateDisp'}>{enrollment_end}</p>
-
+                            <h4 className={'dateTit'}>Oppmeldingsslutt:</h4>
+                            <p className={'dateDisp'}>{enrollment_end}</p>
                         <h4 className={'dateTit'}>Tilbys ved:</h4>
                         <div>{courseLocationElements}</div>
 
-
-                        <div>
-                            <h4 className={'dateTit'}>
-                                Organization:
-                            </h4>
-                            {org}
-                        </div>
+                            <div>
+                                <h4 className={'dateTit'}>
+                                    Tilbyder:
+                                </h4>
+                                {org}
+                            </div>
+                      
                     </div>
                     {/* END Course Description Table */}
                 </div>
@@ -127,7 +132,7 @@ export class Kurs extends React.Component {
 
                 <div>
                     <h4 className={'descTit'}>
-                        Description:
+                        Beskrivelse:
                     </h4>
                     <p className={'descPar'}>
                         {course_description}

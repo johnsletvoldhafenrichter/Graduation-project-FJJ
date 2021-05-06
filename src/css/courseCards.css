@@ -1,6 +1,6 @@
 .card {
     width: 15em;
-    height: 20em;
+    height: 17em;
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -14,19 +14,21 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-bottom: -7px;
+    margin-bottom: -7px;
 }
 
 .imageStyles {
     flex: 1;
-    max-width: 10em;
-    max-height: 7em;
-    margin: 10px 0
+    max-width: 15em;
+    max-height: 10em;
+    padding: 0;
 }
 
 .H5Style {
     flex: 1;
     min-height: 2.5em;
-    margin: 0;
+    margin-top: -5%;
     font-size: 14px;
     font-weight: bold;
 }
@@ -39,10 +41,12 @@
     width: 50%;
     margin: 0 5px;
     font-size: 11px;
+    max-height: 1em;
 }
 .dateTitleStyle {
     margin: 0;
     font-size: 12px;
+    max-height: 0.3em;
 }
 .H6Styles {
     margin: 0;
