@@ -104,23 +104,22 @@ export class DinSide extends React.Component {
 
         return (
             <div className="dinSideContainer">
-
                 {/*Tab buttons*/}
                 {filtering ? <Tab style={{cursor: 'auto', justifyContent: 'center'}}>
                         Filtrering
                     </Tab> :
                     <Stack style={{justifyContent: 'center'}}>
                         <Tab
-                            active={activeTab === "obligCourses"}
-                            onClick={() => this.handleClickTab("obligCourses")}
-                        >
-                            Obligatoriske kurs
-                        </Tab>
-                        <Tab
                             active={activeTab === "localCourses"}
                             onClick={() => this.handleClickTab("localCourses")}
                         >
                             Lokale kurs
+                        </Tab>
+                        <Tab
+                            active={activeTab === "obligCourses"}
+                            onClick={() => this.handleClickTab("obligCourses")}
+                        >
+                            Obligatoriske kurs
                         </Tab>
                         <Tab
                             active={activeTab === "recommendedCourses"}
@@ -134,7 +133,6 @@ export class DinSide extends React.Component {
                 <div className={'coursesContainer'}>
                     {courseCard}
                 </div>
-
             </div>
         );
     }
