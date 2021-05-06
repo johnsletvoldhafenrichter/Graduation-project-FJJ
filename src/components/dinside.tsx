@@ -107,17 +107,18 @@ export class DinSide extends React.Component {
 
             {/*Tab buttons*/}
             <Stack style={{justifyContent: 'center'}}>
-              <Tab
-                active={activeTab === "obligCourses"}
-                onClick={() => this.handleClickTab("obligCourses")}
-              >
-                Obligatoriske kurs
-              </Tab>
+
               <Tab
                 active={activeTab === "localCourses"}
                 onClick={() => this.handleClickTab("localCourses")}
               >
                 Lokale kurs
+              </Tab>
+              <Tab
+                active={activeTab === "obligCourses"}
+                onClick={() => this.handleClickTab("obligCourses")}
+              >
+                Obligatoriske kurs
               </Tab>
               <Tab
                 active={activeTab === "recommendedCourses"}
