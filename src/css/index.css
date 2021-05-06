@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.ds-application-layout > .main-column > .main-content {
+  padding: 0 !important;
+}

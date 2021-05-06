@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, H5, Text, H6, SubTitle2, Tag, SimpleTable} from "@dossier/mithra-ui";
+import {Card, H5, Text, H6,Stack, SubTitle2, Tag, SimpleTable, Tab} from "@dossier/mithra-ui";
 import {Kurs} from "./kurs";
 import '../css/courseCards.css';
 
@@ -16,11 +16,12 @@ export class Kursoversikt extends React.Component {
         const {history} = this.props;
         history.push("/coursedetails/" + courseId);
     }
+
     formatDate(date: any) {
-        let day = date.slice(8,10);
+        let day = date.slice(8, 10);
         let month = date.slice(5, 7)
-        let year = date.slice(0,4)
-        return  `${day}-${month}-${year}`;
+        let year = date.slice(0, 4)
+        return `${day}-${month}-${year}`;
     }
 
     render() {

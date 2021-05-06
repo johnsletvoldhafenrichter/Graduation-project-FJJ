@@ -1,7 +1,7 @@
 import {getCourseById} from "../functions/kursFunctions";
 import React from "react";
-import {Card, H5, H6, SimpleTable, SubTitle2, Text} from "@dossier/mithra-ui";
-import '../css/kurs.css'
+import {Tag} from "@dossier/mithra-ui";
+import '../css/kurs.css';
 
 export class Kurs extends React.Component {
     constructor(props: {}) {
@@ -50,16 +50,19 @@ export class Kurs extends React.Component {
         //@ts-ignore
         const {courseLocationArray} = this.state;
         // @ts-ignore
-        const courseLocationElements = courseLocationArray.map(({location_name}) => {
-              return (
-                  <br>
-                    {location_name}
-                  </br>
+        const courseLocationElements = courseLocationArray.map((element) => {
+                return (
+                    <div style={{margin: '0 0 0 0',}}>
+                        <Tag intent="neutral"
+                             text={element}
+                             id={element}/>
+                    </div>
+                )
+            }
+        );
 
-              )}
-            );
-
-        let {image_url,
+        let {
+            image_url,
             image_description,
             course_name,
             org,
@@ -67,7 +70,8 @@ export class Kurs extends React.Component {
             start_date,
             end_date,
             enrollment_start,
-            enrollment_end} = courseDetail;
+            enrollment_end
+        } = courseDetail;
 
         if (start_date && end_date && enrollment_start && enrollment_end) {
             start_date = this.formatDate(start_date);
@@ -99,7 +103,6 @@ export class Kurs extends React.Component {
 
                     {/* Course Description Table */}
                     <div className={'infoContainer'} id={'tableContainer'}>
-
                             <h4 className={'dateTit'} id={'startDateTit'}>Startdato:</h4>
                             <p className={'dateDisp'}>{start_date}</p>
 
@@ -111,10 +114,8 @@ export class Kurs extends React.Component {
 
                             <h4 className={'dateTit'}>Oppmeldingsslutt:</h4>
                             <p className={'dateDisp'}>{enrollment_end}</p>
-
-                            <h4 className={'dateTit'}>Tilbys ved:</h4>
-                            <div>{courseLocationArray}</div>
-
+                        <h4 className={'dateTit'}>Tilbys ved:</h4>
+                        <div>{courseLocationElements}</div>
 
                             <div>
                                 <h4 className={'dateTit'}>
@@ -122,6 +123,7 @@ export class Kurs extends React.Component {
                                 </h4>
                                 {org}
                             </div>
+                      
                     </div>
                     {/* END Course Description Table */}
                 </div>

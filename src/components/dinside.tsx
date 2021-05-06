@@ -103,7 +103,7 @@ export class DinSide extends React.Component {
             });
 
         return (
-          <div>
+          <div className="dinSideContainer">
 
             {/*Tab buttons*/}
             <Stack style={{justifyContent: 'center'}}>
