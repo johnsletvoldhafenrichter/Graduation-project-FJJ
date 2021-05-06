@@ -207,7 +207,6 @@ export default class Main extends React.Component<IProps, MainState> {
           el.classList.remove("activeNav");
       });
       event.target.classList.add("activeNav")
-      console.log(event.target.classList)
   }
 
   setFilteringState(bool: boolean){
@@ -217,11 +216,8 @@ export default class Main extends React.Component<IProps, MainState> {
   }
 
   render() {
-    //@ts-ignore
     const {courses, searching, searchValues, mainCourses} = this.state;
-    //@ts-ignore
     const {siteHeader} = this.state;
-    //@ts-ignore
     const tray = this.state.trayState;
     return (
       <Router>
