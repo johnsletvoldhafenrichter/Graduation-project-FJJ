@@ -7,7 +7,6 @@ export class MineKurs extends React.Component{
   constructor(props: any) {
     super(props);
     this.state = {
-      myCourses: [],
       error: null,
       activeTab: 'startedCourses',
     }
@@ -40,7 +39,8 @@ export class MineKurs extends React.Component{
     if(courses.error) {
       this.setState({error:courses.error})
     }
-    this.setState({myCourses: courses});
+    //@ts-ignore
+    this.props.setMyCourses(courses);
   }
 
   formatDate(date: any) {
@@ -54,14 +54,13 @@ export class MineKurs extends React.Component{
     // @ts-ignore
     const {error} = this.state;
     if(error) {
-      console.log(error)
       return <div>ERROR!!!</div>
 
     }
     //@ts-ignore
-    let {myCourses, activeTab} = this.state;
+    let {activeTab} = this.state;
     //@ts-ignore
-    let {searchValues, filtering} = this.props;
+    let {searchValues, filtering, myCourses} = this.props;
     if (searchValues === null) {
       return <div>Nothing found!</div>
     } else if (searchValues.length > 0) {
