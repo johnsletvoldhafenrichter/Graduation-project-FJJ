@@ -93,16 +93,16 @@ export class Kurs extends React.Component {
                     {/* Course Description Table */}
                     <div className={'infoContainer'} id={'tableContainer'}>
 
-                            <h4 className={'dateTit'} id={'startDateTit'}>Course Start:</h4>
+                            <h4 className={'dateTit'} id={'startDateTit'}>Startdato:</h4>
                             <p className={'dateDisp'}>{start_date}</p>
 
-                            <h4 className={'dateTit'}>Course End:</h4>
+                            <h4 className={'dateTit'}>Sluttdato:</h4>
                             <p className={'dateDisp'}>{end_date}</p>
 
-                            <h4 className={'dateTit'}>Enrollment Start:</h4>
+                            <h4 className={'dateTit'}>Oppmeldingsstart:</h4>
                             <p className={'dateDisp'}>{enrollment_start}</p>
 
-                            <h4 className={'dateTit'}>Enrollment End:</h4>
+                            <h4 className={'dateTit'}>Oppmeldingsslutt:</h4>
                             <p className={'dateDisp'}>{enrollment_end}</p>
 
                             <h4 className={'dateTit'}>Tilbys ved:</h4>
@@ -111,7 +111,7 @@ export class Kurs extends React.Component {
 
                             <div>
                                 <h4 className={'dateTit'}>
-                                    Organization:
+                                    Tilbyder:
                                 </h4>
                                 {org}
                             </div>
