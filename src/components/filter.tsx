@@ -61,6 +61,7 @@ export class Filter extends React.Component<any, any> {
         const {selectedTags, activeTab} = this.state
         this.props.setFilteringState(true)
         let queryResult = await getQueryResult(activeTab, selectedTags, path)
+        console.log(path, queryResult)
         if (path === '/courses') {
             this.props.setCourses(queryResult);
         } else {

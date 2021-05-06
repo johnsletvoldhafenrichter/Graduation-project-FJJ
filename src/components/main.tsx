@@ -316,7 +316,7 @@ export default class Main extends React.Component<IProps, MainState> {
                 path='/mycourses'
                 render={(props) => (
                   // @ts-ignore
-                  <MineKurs {...props} setMyCourses={this.setMyCourses.bind(this)} searchValues={searchValues} filtering={this.state.filtering}/>
+                  <MineKurs {...props} setMyCourses={this.setMyCourses.bind(this)} searchValues={searchValues} filtering={this.state.filtering} myCourses={this.state.myCourses}/>
                 )}>
               </Route>
             </Switch>
