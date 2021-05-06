@@ -71,12 +71,19 @@ export class Kursoversikt extends React.Component {
                     </Card>
                 );
             });
+        // @ts-ignore
         return (
             // @ts-ignore
             courseDetails ? <Kurs course={courseDetails}/> :
-                <div className={'coursesContainer'}>
-                    {filtering && <div>Filtering!</div>}
-                    {courseCard}
+                <div className="allCoursesContainer">
+                    {/*//@ts-ignore*/}
+                        <Tab style={{cursor:'auto', justifyContent: 'center'}}>
+                            Filtrer eller søk i alle kurs
+                        </Tab>
+                    <div className={'coursesContainer'}>
+                        {filtering && <div>Filtering!</div>}
+                        {courseCard}
+                    </div>
                 </div>
         );
     }
