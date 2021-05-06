@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, H5, Text, H6,Stack, SubTitle2, Tag, SimpleTable, Tab} from "@dossier/mithra-ui";
+import {Card, H5, Text, H6, Stack, SubTitle2, Tag, SimpleTable, Tab} from "@dossier/mithra-ui";
 import {Kurs} from "./kurs";
 import '../css/courseCards.css';
 
@@ -44,7 +44,7 @@ export class Kursoversikt extends React.Component {
             .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
                 return (
                     // @ts-ignore
-                    <Card className={'card'} onClick={(event) => this.handleClick(course_id)} key={course_id}>
+                    <Card className={'card'} onClick={(event) => this.handleClick(course_id)} key={course_id} style={{cursor: 'pointer'}}>
                         <img className={'imageStyles'} alt="amazingeness" src={image_url}/>
                         <H5 className={'H5Style truncate'}>
                             {course_name}
@@ -77,12 +77,15 @@ export class Kursoversikt extends React.Component {
             // @ts-ignore
             courseDetails ? <Kurs course={courseDetails}/> :
                 <div className="allCoursesContainer">
-                    {/*//@ts-ignore*/}
-                        <Tab style={{cursor:'auto', justifyContent: 'center'}}>
+                    {!filtering ?
+                        <Tab style={{cursor: 'auto', justifyContent: 'center'}}>
                             Filtrer eller søk i alle kurs
                         </Tab>
+                        :
+                        <Tab style={{cursor: 'auto', justifyContent: 'center'}}>
+                            Filtrering
+                        </Tab>}
                     <div className={'coursesContainer'}>
-                        {filtering && <div>Filtering!</div>}
                         {courseCard}
                     </div>
                 </div>

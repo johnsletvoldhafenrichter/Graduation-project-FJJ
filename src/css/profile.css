@@ -10,5 +10,15 @@
 }
 
 .profilePicture {
-    margin: 5%;
+    margin-bottom: 48px;
+}
+
+.profileCard {
+    padding: 3rem;
+    background-color: rgba(49, 63, 81, 0.85);
+    border-radius: 20px;
+}
+
+.ds-simple-table {
+    color: white;
 }

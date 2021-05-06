@@ -199,8 +199,15 @@ export default class Main extends React.Component<IProps, MainState> {
         }
     }
 
-  setSiteHeaderDynamically(siteHeader: string){
+  setSiteHeaderDynamically(siteHeader: string, event:any){
     this.setState({siteHeader})
+      let elems = document.querySelectorAll(".activeNav");
+      [].forEach.call(elems, function(el) {
+          //@ts-ignore
+          el.classList.remove("activeNav");
+      });
+      event.target.classList.add("activeNav")
+      console.log(event.target.classList)
   }
 
   setFilteringState(bool: boolean){
@@ -247,27 +254,27 @@ export default class Main extends React.Component<IProps, MainState> {
                   <NavbarButton
                     icon="AdminHome"
                     text="Min side"
-                    onClick={()=> {this.closeSearch('dinSide'); this.setSiteHeaderDynamically('Min Side')}}
+                    onClick={(event:any)=> {this.closeSearch('dinSide'); this.setSiteHeaderDynamically('Min Side', event)}}
                     as={Link}
                     to="/dinside"/>
                   <NavbarButton
                     icon="UserPlans"
                     text="Mine kurs"
-                    onClick={()=> {this.closeSearch('mineKurs'); this.setSiteHeaderDynamically('Mine Kurs')}}
+                    onClick={(event:any)=> {this.closeSearch('mineKurs'); this.setSiteHeaderDynamically('Mine Kurs', event)}}
                     as={Link}
                     to="/mycourses"
                   />
                   <NavbarButton
                     icon="Learn"
                     text="Kursoversikt"
-                    onClick={()=> {this.closeSearch('kursoversikt'); this.setSiteHeaderDynamically('Kursoversikt')}}
+                    onClick={(event:any)=> {this.closeSearch('kursoversikt'); this.setSiteHeaderDynamically('Kursoversikt', event)}}
                     as={Link}
                     to="/courses"/>
                   <NavbarButton
                     icon="User"
                     text="Profil"
                     as={Link}
-                    onClick={ ()=> {this.setSiteHeaderDynamically('Profil')}}
+                    onClick={ (event:any)=> {this.setSiteHeaderDynamically('Profil', event)}}
                     to="/profile"/>
                   <NavbarButton
                     onClick={() => logoutfunction()}
