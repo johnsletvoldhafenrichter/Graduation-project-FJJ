@@ -37,6 +37,13 @@ export class Kurs extends React.Component {
         }
     }
 
+    formatDate(date: any) {
+        let day = date.slice(8,10);
+        let month = date.slice(5, 7)
+        let year = date.slice(0,4)
+        return  `${day}-${month}-${year}`;
+    }
+
     render() {
         //@ts-ignore
         const courseDetail = this.state.course;
@@ -63,10 +70,10 @@ export class Kurs extends React.Component {
             enrollment_end} = courseDetail;
 
         if (start_date && end_date && enrollment_start && enrollment_end) {
-            start_date = start_date.slice(0,10);
-            end_date = end_date.slice(0,10);
-            enrollment_start = enrollment_start.slice(0,10);
-            enrollment_end = enrollment_end.slice(0,10);
+            start_date = this.formatDate(start_date);
+            end_date = this.formatDate(end_date);
+            enrollment_start = this.formatDate(enrollment_start);
+            enrollment_end = this.formatDate(enrollment_end);
         }
 
         // @ts-ignore
