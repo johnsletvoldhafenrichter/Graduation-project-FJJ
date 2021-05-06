@@ -3,20 +3,19 @@
     grid-template-rows: auto auto auto;
     align-items: center;
     justify-content: center;
-    background:url("../assets/boxes.svg");
-    box-shadow: 0 0 20px 20px white inset;
     height: 90vh;
     padding: 0 1rem;
 }
 
 .infoContainer {
     flex: 1;
-    margin: 20px;
+    color: white;
 }
 
 .img {
     width: 100%;
     min-width: 200px;
+    height: 100%;
 }
 
 #tableContainer {
@@ -28,6 +27,8 @@
 .imageAndTableContainer {
     display: flex;
     flex-wrap: wrap;
+    background-color: rgba(49, 63, 81, 0.85);
+    padding: 2rem;
 }
 
 .dateTit {
