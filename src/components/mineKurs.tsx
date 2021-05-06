@@ -73,7 +73,7 @@ export class MineKurs extends React.Component{
         .map(({course_id, course_name, image_url, start_date, end_date, org, enrollment_end}) => {
           return (
               // @ts-ignore
-              <Card className={'card'} onClick={(event) => this.handleClickCard(course_id)} key={course_id}>
+              <Card className={'card'} onClick={(event) => this.handleClickCard(course_id)} key={course_id} style={{cursor: 'pointer'}}>
                 <img className={'imageStyles'} alt="amazingeness" src={image_url}/>
                 <H5 className={'H5Style truncate'}>
                   {course_name}
@@ -107,7 +107,9 @@ export class MineKurs extends React.Component{
 
         {/*Tab buttons*/}
 
-        {filtering ? <div>Filtering!</div> :
+        {filtering ? <Tab style={{cursor: 'auto', justifyContent: 'center'}}>
+              Filtrering
+            </Tab> :
         <Stack style={{justifyContent: 'center'}}>
           <Tab
             active={activeTab === "enrolledCourses"}

@@ -15,3 +15,6 @@ code {
 .ds-application-layout > .main-column > .main-content {
   padding: 0 !important;
 }
+.activeNav {
+  border-right: 4px solid #6fb98f !important;
+}

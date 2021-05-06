@@ -38,10 +38,10 @@ export class Kurs extends React.Component {
     }
 
     formatDate(date: any) {
-        let day = date.slice(8,10);
+        let day = date.slice(8, 10);
         let month = date.slice(5, 7)
-        let year = date.slice(0,4)
-        return  `${day}-${month}-${year}`;
+        let year = date.slice(0, 4)
+        return `${day}-${month}-${year}`;
     }
 
     render() {
@@ -103,27 +103,27 @@ export class Kurs extends React.Component {
 
                     {/* Course Description Table */}
                     <div className={'infoContainer'} id={'tableContainer'}>
-                            <h4 className={'dateTit'} id={'startDateTit'}>Startdato:</h4>
-                            <p className={'dateDisp'}>{start_date}</p>
+                        <h4 className={'dateTit'} id={'startDateTit'}>Startdato:</h4>
+                        <p className={'dateDisp'}>{start_date}</p>
 
-                            <h4 className={'dateTit'}>Sluttdato:</h4>
-                            <p className={'dateDisp'}>{end_date}</p>
+                        <h4 className={'dateTit'}>Sluttdato:</h4>
+                        <p className={'dateDisp'}>{end_date}</p>
 
-                            <h4 className={'dateTit'}>Oppmeldingsstart:</h4>
-                            <p className={'dateDisp'}>{enrollment_start}</p>
+                        <h4 className={'dateTit'}>Oppmeldingsstart:</h4>
+                        <p className={'dateDisp'}>{enrollment_start}</p>
 
-                            <h4 className={'dateTit'}>Oppmeldingsslutt:</h4>
-                            <p className={'dateDisp'}>{enrollment_end}</p>
+                        <h4 className={'dateTit'}>Oppmeldingsslutt:</h4>
+                        <p className={'dateDisp'}>{enrollment_end}</p>
                         <h4 className={'dateTit'}>Tilbys ved:</h4>
                         <div>{courseLocationElements}</div>
 
-                            <div>
-                                <h4 className={'dateTit'}>
-                                    Tilbyder:
-                                </h4>
-                                {org}
-                            </div>
-                      
+                        <div>
+                            <h4 className={'dateTit'}>
+                                Tilbyder:
+                            </h4>
+                            {org}
+                        </div>
+
                     </div>
                     {/* END Course Description Table */}
                 </div>
